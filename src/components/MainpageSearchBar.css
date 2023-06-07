@@ -1,0 +1,17 @@
+.input-group{
+    display: flex;
+    flex-direction:row-reverse;
+    justify-content:center;
+}
+
+#search-g-data{
+    margin-top: 2%;
+}
+
+#mainpage-link{
+    margin-top: 5%;
+}
+
+.main-search-container{
+    width: 50% !important;
+}
