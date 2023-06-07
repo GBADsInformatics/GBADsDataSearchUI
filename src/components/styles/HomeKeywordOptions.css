@@ -1,0 +1,148 @@
+.main-keyword-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+}
+
+.keyword-parent-homepage{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#query-bar{
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    
+    border-top-right-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
+}
+
+#update-query-b{
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.keyword-home-form{
+    width: 50vw;
+}
+
+.main-options-form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.keyword-homepage-selected{
+    background-color: #FF8029 !important;
+    border: #FF8029 !important;
+    color: white;
+    /* text-align: center; */
+}
+
+.keyword-homepage-disabled{
+    background-color: #C4C4C4 !important;
+    border: #C4C4C4 !important;
+    border-radius: 5% !important;
+}
+
+.center-title{
+    text-align: center;
+    /* margin-left: 25%; */
+}
+
+/* CSS */
+/* For screens with a maximum width of 768px (typical for iPhones) */
+@media (max-width: 768px) {
+    .keyword-parent-homepage {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /* Spread keywords to both sides */
+    }
+    
+    .keyword-wrapper {
+        flex: 0 0 calc(50% - 10px); /* Display 2 keywords per row with some spacing */
+        margin: 5px 0; /* Add spacing only on the top and bottom */
+        width: 48%; /* Adjust the width for mobile view */
+        text-align: center; /* Center text horizontally within the cell */
+    }
+
+    .keyword-homepage-selected,
+    .keyword-homepage-disabled {
+        width: 100%; /* Make sure each keyword takes full width within the wrapper */
+    }
+}
+
+/* For screens larger than 768px (desktop view) */
+@media (min-width: 769px) {
+    .keyword-parent-homepage {
+        display: flex;
+        justify-content: space-between; /* Spread keywords to both sides */
+    }
+
+    .keyword-wrapper {
+        flex: 0 0 calc(50% - 10px); /* Adjust the width for desktop view with some spacing */
+        margin: 5px 0; /* Add spacing only on the top and bottom */
+        text-align: center;
+        border-radius: 15% !important; /* Center text horizontally within the cell */
+    }
+
+    .keyword-homepage-selected,
+    .keyword-homepage-disabled {
+        width: 100%; /* Make sure each keyword takes full width within the wrapper */
+    }
+}
+
+
+#add-button-home{
+    border: 0.5px solid #7A7A7A;
+    background: #FFF;
+    color: #7A7A7A;
+    text-align: center;
+    width: 100%;
+}
+
+#add-button-home:hover{
+    color: white;
+    background-color: #828181;
+}
+
+.shadow-box{
+    width: 110%;
+    height: 100%;
+    padding: 3%;
+    border-radius: 3px;
+    border: 1px solid #E5E5E5;
+    background: #FFF;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.20);
+}
+
+.semantic-layer-parent{
+    margin-top: 3% !important;
+}
+
+/* .check{
+    border: 1px solid red;
+} */
+
+[class^="ico-"], [class*=" ico-"] {
+    font: normal 1em/1 Arial, sans-serif;
+    display: inline-block;
+  }
+
+.home-icon{
+    margin-right: -5% !important;
+}
+  
+  .ico-times::before { content: "\2716"; }
+  .ico-check::before { content: "\2714"; }

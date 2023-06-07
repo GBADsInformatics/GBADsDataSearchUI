@@ -1,0 +1,68 @@
+.align-year-and-link{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items:center;
+    /* margin-top: -2%; */
+}
+
+.align-icon-left{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 0;
+    height: 40px;
+    width: 20%;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .align-icon-left{
+        width: 40%;
+    }
+  }
+
+#quick-link-download{
+    flex-grow: 0;
+    height: 40px;
+}
+
+#quick-link-download > a{
+    text-decoration: none;
+}
+
+#quick-link-download > a:hover{
+    text-decoration: underline;
+}
+
+.modal-90w{
+    width: 90% !important;
+}
+
+.title-and-desc{
+    cursor:pointer;
+}
+
+.split-modal{
+    display: flex;
+    flex-direction: row;
+}
+
+.split-modal > div{
+    /* border: 1px solid red; */
+    width: 50%;
+}
+
+.left-align-modal-icons{
+    display: flex;
+    flex-direction: row;
+}
+
+/* .year-and-csv-loading-parent{
+    display: flex;
+    justify-content: center;
+    margin-top: 20%;
+}
+
+.year-and-csv-loading{
+
+} */

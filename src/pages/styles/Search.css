@@ -1,0 +1,74 @@
+#paper-info{
+    margin-top: 2% !important;
+    margin-left: -0.1%;
+}
+
+#organize-main-search{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sidebar-loading{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar-loading-cell{
+    background-color: #F7931D !important;
+    border-radius: 5%;
+    color: white;
+    /* text-align: center; */
+    margin-top: 2%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    #organize-main-search{
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-self: center;
+        align-items: center;
+    }
+    #main-grid-container{
+        width: 100vw !important;
+        padding-right: 10%;
+    }
+    #paper-info{
+        display: flex;
+        justify-content: center;
+    }
+    .keyword-sidebar-main-parent{
+        width: 100%;
+    }
+  }
+
+  @media only screen and (min-width: 900px) {
+    .keyword-sidebar-main-parent{
+        width: 40% !important;
+    }
+
+  }
+
+  @media only screen and (min-width: 1100px) {
+    .keyword-sidebar-main-parent{
+        width: 20% !important;
+    }
+
+  }
+
+  .keyword-sidebar-main-parent{
+    padding-top: 2% !important;
+    margin-top: 3% !important;
+  }
+
+  #main-grid-container{
+    padding-top: 2%;
+    margin-top: 3%;
+  }

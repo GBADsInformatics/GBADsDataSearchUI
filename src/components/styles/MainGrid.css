@@ -1,0 +1,31 @@
+.main-table{
+  border: 1px solid #E5E5E5;
+  background: #FFF;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.20);  
+}
+
+.inner-table{
+    padding-top: 2%;
+    margin-top: 3%;
+}
+
+tr:hover td{
+    background-color: #F1F1F1;
+}
+
+.main-option-button {
+    background: rgba(247, 147, 29, 0.42) !important;
+    color: white;
+    border: 0.0px solid black !important;
+  }
+
+  .main-option-button-selected {
+    background-color: #FF8029 !important;
+    color: white;
+    border: 0.0px solid black !important;
+  }
+
+.main-option-button:hover {
+    background-color: #faa369 !important;
+    color: white;
+  }
