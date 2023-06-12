@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { ButtonGroup, Container } from 'react-bootstrap';
-import "./MainGrid.css";
+import "./styles/MainGrid.css";
 // import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';

@@ -1,8 +1,8 @@
 import { useSearchParams } from "react-router-dom";
-import SearchNav from "../components/SearchpageNav";
+import SearchNav from "../components/SearchNav";
 import PaperInfo from '../components/PaperInformation';
 import MainGrid from '../components/MainGrid';
-import "./Search.css";
+import "./styles/Search.css";
 import { Container } from 'react-bootstrap';
 
 function Search(){
@@ -17,7 +17,7 @@ function Search(){
                 <Container id="paper-info">
                     <PaperInfo/>
                 </Container>
-                <Container style={{width: '2900px'}}>
+                <Container id="main-grid-container" style={{width: '2900px'}}>
                     <MainGrid/>
                 </Container>
             </Container>

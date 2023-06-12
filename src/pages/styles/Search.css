@@ -1,0 +1,28 @@
+#paper-info{
+    margin-top: 2% !important;
+    margin-left: -0.1%;
+}
+
+#organize-main-search{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    #organize-main-search{
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-self: center;
+        align-items: center;
+    }
+    #main-grid-container{
+        width: auto !important;
+    }
+    #paper-info{
+        display: flex;
+        justify-content: center;
+    }
+  }

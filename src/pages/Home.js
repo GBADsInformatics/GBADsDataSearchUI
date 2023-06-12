@@ -3,7 +3,7 @@ import SearchBar from "../components/MainpageSearchBar";
 import MainpageNav from "../components/MainpageNav";
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
-import './Home.css';
+import './styles/Home.css';
 
 function Home() {
   return (

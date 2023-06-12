@@ -4,7 +4,7 @@ import { Form, FormControl, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { createSearchParams, useNavigate } from 'react-router-dom';
-import "./MainpageSearchBar.css";
+import "./styles/MainpageSearchBar.css";
 
 const SearchBar = () => {
   const [searchText, setSearchText] = useState('');
@@ -30,7 +30,7 @@ const SearchBar = () => {
 
   return (
     <Container className='main-search-container'>
-        <Form inline onSubmit={handleSearch}>
+        <Form onSubmit={handleSearch}>
         <div className="input-group">
             <FormControl id="main-search-text" type="text" name="search" placeholder="Search" className="mr-sm-2 rounded-left mainpage-search" value={searchText} onChange={handleSearchChange} />
             <div className="input-group-append">
