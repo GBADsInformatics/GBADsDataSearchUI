@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
     faCalendar,
@@ -17,6 +18,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Button, ButtonGroup, Container } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
+import Placeholder from 'react-bootstrap/Placeholder';
 
 import "./styles/CellData.css";
 
@@ -53,17 +55,45 @@ function CellData(props){
 
     const handleClose = () => setShow(false);
     const handleShow = (event) => {
-        // const div = event.currentTarget;
-        // const edit = div.querySelector('.edit');
-        // console.log("Div: ");
-        // console.log(div);
-        // console.log("Edit: ");
-        // console.log(edit);
-        // if (event.currentTarget !== event.target) {
-        //     return;
-        // }
         return setShow(true);
     };
+
+
+    const [isLoading, setLoading] = useState(true);
+    const [reqData, setRequestedData] = useState();
+
+    useEffect(() => {
+        axios.get("https://spacematters.ca/").then(response => {
+        // axios.get("https://pokeapi.co/api/v2/pokemon/4").then(response => {
+        setRequestedData(response.data);
+        setLoading(false);
+        });
+    }, []);
+
+    if (isLoading) {
+        
+        return(
+        <div>
+            <div className='title-and-desc'>
+                <Placeholder as="p" animation="glow">
+                    <Placeholder xs={4} />
+                </Placeholder>
+                <Placeholder as="p" animation="glow">
+                    <Placeholder xs={10} />
+                </Placeholder>
+            </div>
+            <div className='year-and-csv-loading-parent'>
+            <Placeholder as="p" animation="glow">
+                <Placeholder xs={2} style={{marginLeft: "20%"}}/>
+                <Placeholder xs={2} style={{marginLeft: "25%"}}/>
+            </Placeholder>
+            </div>
+        </div>
+        );
+    }
+
+
+
     return(
         <>
         <div>
@@ -83,20 +113,7 @@ function CellData(props){
                 </div>
             </div>
         </div>
-        {/* title="FAOSTAT Crops and livestock products - Stocks"
-                            desc="Livestock population statistics covering the following categories: Animals live n.e.s.; Asses; Beehives; Buffaloes; Camelids, other; Camels; Cattle; Chickens; Ducks; Geese and guinea fowls; Goats; Horses; Mules; Pigeons, other birds; Pigs; Rabbits and hares; Rodents, other; Sheep; Turkeys."
-                            year= "2021" 
-                            csvDownloadlink="google.com" 
-                            nameOfDataSet="Example Name of Dataset"
-                            authors="Kassy Raymond, Deb Stacey, Matthew Szurkowski"
-                            nameOfDataSource="Example name of data source"
-                            endYear="2018"
-                            tableName="Example Table Name"
-                            apiCall="Example API Call script"
-                            metadataDownloadLink="google.com"
-                            columnsIncluded="Example columns included"
-                            measured="Example species 1, species 2, etc"
-                            spatialRange="Example spacial range" */}
+
         <Modal show={show} onHide={handleClose} animation={true} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>{props.nameOfDataSet}</Modal.Title>
