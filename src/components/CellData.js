@@ -1,6 +1,20 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faCloudDownload, faPencil, faUsers, faLaptop, faCommentAlt, faColumns, faCow, faGlobeAmericas} from '@fortawesome/free-solid-svg-icons';
+import { 
+    faCalendar,
+    faCloudDownload, 
+    faPencil, 
+    faUsers, 
+    faLaptop, 
+    faCommentAlt, 
+    faColumns, 
+    faCow, 
+    faGlobeAmericas,
+    faClock,
+    faLaptopHouse,
+    faPerson,
+    faCertificate
+} from '@fortawesome/free-solid-svg-icons';
 import { Button, ButtonGroup, Container } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
@@ -20,7 +34,23 @@ function ShortenDesc(text){
 function CellData(props){
     const descText = ShortenDesc(props.desc);
 
+
+    var formatDateRange = props.startYear + ' - ' + props.endYear
+
     const [show, setShow] = useState(false);
+
+    const [copied, setCopy] = useState(false);
+
+    const copyText = () => {
+        setCopy(true);
+
+        navigator.clipboard.writeText("testing GBADs")
+    
+        setTimeout(() => {
+            setCopy(false);
+        }, 3000);
+      };
+
     const handleClose = () => setShow(false);
     const handleShow = (event) => {
         // const div = event.currentTarget;
@@ -43,12 +73,12 @@ function CellData(props){
             </div>
             <div className='align-year-and-link'>
                 <div className='align-icon-left'>
-                    <FontAwesomeIcon icon={faCalendar} style={{ color: 'black', marginRight: "20%", marginTop: "8%" }}/>
-                    <p>{props.year}</p>
+                    <FontAwesomeIcon icon={faCalendar} style={{ color: 'black', marginRight: "4%", marginTop: "2.2%" }}/>
+                    <p style={{display: "inline"}}>{formatDateRange}</p>
                 </div>
                 <div id="quick-link-download">
                     <a href={props.csvDownloadlink} download>CSV
-                        <FontAwesomeIcon icon={faCloudDownload} style={{ color: 'black' }}/>
+                        <FontAwesomeIcon icon={faCloudDownload} style={{ color: 'black'}}/>
                     </a>
                 </div>
             </div>
@@ -95,8 +125,8 @@ function CellData(props){
                             <Button variant="outline-primary" onClick={handleClose}>
                                 CSV
                             </Button>
-                            <Button variant="outline-secondary" onClick={handleClose}>
-                                API CALL
+                            <Button variant={ copied ? "success" : "outline-secondary"} onClick={copyText}>
+                                { copied ? "Copied to clipboard!" : "API CALL" }
                             </Button>
                             <Button variant="outline-secondary" onClick={handleClose}>
                                 Download metadata
@@ -114,11 +144,27 @@ function CellData(props){
                     </div>
                     <div className='left-align-modal-icons'>
                         <FontAwesomeIcon icon={faCow} style={{ color: 'black', marginTop: "1%", marginRight: "1%" }}/>
-                        <p><b>Measured species:</b> {props.measured}</p>
+                        <p><b>Measured values:</b> {props.measured}</p>
                     </div>
                     <div className='left-align-modal-icons'>
                         <FontAwesomeIcon icon={faGlobeAmericas} style={{ color: 'black', marginTop: "1%", marginRight: "1%" }}/>
                         <p><b>Spatial Range:</b> {props.spatialRange}</p>
+                    </div>
+                    <div className='left-align-modal-icons'>
+                        <FontAwesomeIcon icon={faClock} style={{ color: 'black', marginTop: "1%", marginRight: "1%" }}/>
+                        <p><b>Temporal Range:</b> {props.temporalRange}</p>
+                    </div>
+                    <div className='left-align-modal-icons'>
+                        <FontAwesomeIcon icon={faLaptopHouse} style={{ color: 'black', marginTop: "1%", marginRight: "1%" }}/>
+                        <p><b>Source:</b> {props.source}</p>
+                    </div>
+                    <div className='left-align-modal-icons'>
+                        <FontAwesomeIcon icon={faPerson} style={{ color: 'black', marginTop: "1%", marginRight: "1%" }}/>
+                        <p><b>Contact point:</b> {props.contactPoint}</p>
+                    </div>
+                    <div className='left-align-modal-icons'>
+                        <FontAwesomeIcon icon={faCertificate} style={{ color: 'black', marginTop: "1%", marginRight: "1%" }}/>
+                        <p><b>Licence:</b> {props.licence}</p>
                     </div>
                 </div>
                 <div>ASK DEB WHAT SHE WANTS HERE</div>

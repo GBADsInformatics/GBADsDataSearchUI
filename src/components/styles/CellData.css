@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items:center;
-    margin-top: -2%;
+    /* margin-top: -2%; */
 }
 
 .align-icon-left{
@@ -11,6 +11,7 @@
     flex-direction: row;
     flex-grow: 0;
     height: 40px;
+    width: 20%;
 }
 
 #quick-link-download{

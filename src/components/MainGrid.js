@@ -28,7 +28,7 @@ function MainGrid() {
                     </ToggleButton> */}
                     <Button variant="outline-secondary">Filter</Button>{' '}
                     <Button variant="outline-secondary">Sort By</Button>{' '}
-                    <Button variant="outline-secondary">Export As</Button>{' '}
+                    {/* <Button variant="outline-secondary">Export As</Button>{' '} */}
                 </ButtonGroup>
             </div>
             <Table responsive>
@@ -43,12 +43,12 @@ function MainGrid() {
                             <CellData 
                             title="FAOSTAT Crops and livestock products - Stocks"
                             desc="Livestock population statistics covering the following categories: Animals live n.e.s.; Asses; Beehives; Buffaloes; Camelids, other; Camels; Cattle; Chickens; Ducks; Geese and guinea fowls; Goats; Horses; Mules; Pigeons, other birds; Pigs; Rabbits and hares; Rodents, other; Sheep; Turkeys."
-                            year= "2021" 
+                            startYear= "2018" 
                             csvDownloadlink="google.com" 
                             nameOfDataSet="Example Name of Dataset"
                             authors="Kassy Raymond, Deb Stacey, Matthew Szurkowski"
                             nameOfDataSource="Example name of data source"
-                            endYear="2018"
+                            endYear="2021"
                             tableName="Example Table Name"
                             apiCall="Example API Call script"
                             metadataDownloadLink="google.com"
@@ -63,12 +63,12 @@ function MainGrid() {
                             <CellData 
                             title="FAOSTAT Crops and livestock products - Stocks"
                             desc="Livestock population statistics covering the following categories: Animals live n.e.s.; Asses; Beehives; Buffaloes; Camelids, other; Camels; Cattle; Chickens; Ducks; Geese and guinea fowls; Goats; Horses; Mules; Pigeons, other birds; Pigs; Rabbits and hares; Rodents, other; Sheep; Turkeys."
-                            year= "2021" 
+                            startYear= "2018" 
                             csvDownloadlink="google.com" 
                             nameOfDataSet="Example Name of Dataset"
                             authors="Kassy Raymond, Deb Stacey, Matthew Szurkowski"
                             nameOfDataSource="Example name of data source"
-                            endYear="2018"
+                            endYear="2021"
                             tableName="Example Table Name"
                             apiCall="Example API Call script"
                             metadataDownloadLink="google.com"
@@ -83,12 +83,12 @@ function MainGrid() {
                             <CellData 
                             title="FAOSTAT Crops and livestock products - Stocks"
                             desc="Livestock population statistics covering the following categories: Animals live n.e.s.; Asses; Beehives; Buffaloes; Camelids, other; Camels; Cattle; Chickens; Ducks; Geese and guinea fowls; Goats; Horses; Mules; Pigeons, other birds; Pigs; Rabbits and hares; Rodents, other; Sheep; Turkeys."
-                            year= "2021" 
+                            startYear= "2018" 
                             csvDownloadlink="google.com" 
                             nameOfDataSet="Example Name of Dataset"
                             authors="Kassy Raymond, Deb Stacey, Matthew Szurkowski"
                             nameOfDataSource="Example name of data source"
-                            endYear="2018"
+                            endYear="2021"
                             tableName="Example Table Name"
                             apiCall="Example API Call script"
                             metadataDownloadLink="google.com"
