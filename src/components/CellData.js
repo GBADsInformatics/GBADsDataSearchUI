@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
     faCalendar,
@@ -16,9 +15,10 @@ import {
     faPerson,
     faCertificate
 } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+
 import { Button, ButtonGroup, Container } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import Placeholder from 'react-bootstrap/Placeholder';
 
 import "./styles/CellData.css";
 
@@ -59,41 +59,6 @@ function CellData(props){
     };
 
 
-    const [isLoading, setLoading] = useState(true);
-    const [reqData, setRequestedData] = useState();
-
-    useEffect(() => {
-        axios.get("https://spacematters.ca/").then(response => {
-        // axios.get("https://pokeapi.co/api/v2/pokemon/4").then(response => {
-        setRequestedData(response.data);
-        setLoading(false);
-        });
-    }, []);
-
-    if (isLoading) {
-        
-        return(
-        <div>
-            <div className='title-and-desc'>
-                <Placeholder as="p" animation="glow">
-                    <Placeholder xs={4} />
-                </Placeholder>
-                <Placeholder as="p" animation="glow">
-                    <Placeholder xs={10} />
-                </Placeholder>
-            </div>
-            <div className='year-and-csv-loading-parent'>
-            <Placeholder as="p" animation="glow">
-                <Placeholder xs={2} style={{marginLeft: "20%"}}/>
-                <Placeholder xs={2} style={{marginLeft: "25%"}}/>
-            </Placeholder>
-            </div>
-        </div>
-        );
-    }
-
-
-
     return(
         <>
         <div>
@@ -116,10 +81,11 @@ function CellData(props){
 
         <Modal show={show} onHide={handleClose} animation={true} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>{props.nameOfDataSet}</Modal.Title>
+          <Modal.Title>{props.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <div className='split-modal'>
+            {/* className='split-modal'   INCLUDE THIS CLASS BELOW LATER WHEN WE WANT TO SPLIT THE CELLS AND UNCOMMENT THE DIV BELOW */}
+            <div>
                 <div>
                     <div className='left-align-modal-icons'>
                         <FontAwesomeIcon icon={faPencil} style={{ color: 'black', marginTop: "1%", marginRight: "1%" }}/>
@@ -139,13 +105,13 @@ function CellData(props){
                     </div>
                     <Container style={{textAlign: "center"}}>
                         <ButtonGroup className="mb-2">
-                            <Button variant="outline-primary" onClick={handleClose}>
+                            <Button variant="outline-primary" onClick={() => window.open(props.csvDownloadlink, '_blank')}>
                                 CSV
                             </Button>
                             <Button variant={ copied ? "success" : "outline-secondary"} onClick={copyText}>
                                 { copied ? "Copied to clipboard!" : "API CALL" }
                             </Button>
-                            <Button variant="outline-secondary" onClick={handleClose}>
+                            <Button variant="outline-secondary" onClick={() => window.open(props.metadataDownloadLink, '_blank')}>
                                 Download metadata
                             </Button>
                         </ButtonGroup>
@@ -184,7 +150,7 @@ function CellData(props){
                         <p><b>Licence:</b> {props.licence}</p>
                     </div>
                 </div>
-                <div>ASK DEB WHAT SHE WANTS HERE</div>
+                {/* <div>ASK DEB WHAT SHE WANTS HERE</div> */}
             </div>
         </Modal.Body>
         <Modal.Footer>
