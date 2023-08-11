@@ -20,7 +20,7 @@ const SearchBar = () => {
     // You can access the search query using e.target.elements.search.value
     console.log('Search query:', searchText);
     navigate({
-      pathname: '/search',
+      pathname: '/search/query',
       search: createSearchParams({
         criteria: searchText
       }).toString()

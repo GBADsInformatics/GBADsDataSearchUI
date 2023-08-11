@@ -8,9 +8,9 @@ const App = () => {
  return (
     <>
        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/faq" element={<FAQ />} />
+          <Route path="/search" element={<Home />} />
+          <Route path="/search/query" element={<Search />} />
+          <Route path="/search/faq" element={<FAQ />} />
        </Routes>
     </>
  );

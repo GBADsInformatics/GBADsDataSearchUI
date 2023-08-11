@@ -19,7 +19,7 @@ function SearchNav(props) {
     // You can access the search query using e.target.elements.search.value
     console.log('Search query:', searchText);
     navigate({
-      pathname: '/search',
+      pathname: '/search/query',
       search: createSearchParams({
         criteria: searchText
       }).toString()
@@ -31,11 +31,11 @@ function SearchNav(props) {
       <Container className='nav-content'>
         <Row>
           <Col style={{marginTop: "1.2%"}}>
-          <Navbar.Brand href="/">GBADs Data</Navbar.Brand>
+          <Navbar.Brand href="/search">GBADs Data</Navbar.Brand>
           </Col>
           <Col>
           <Nav className="me-auto fix-search-nav">
-            <Nav.Link href="#home">FAQ</Nav.Link>
+            <Nav.Link href="/search/faq">FAQ</Nav.Link>
             <Nav.Link href="#features">GBADs</Nav.Link>
             <Nav.Link href="#pricing">Informatics</Nav.Link>
           </Nav>
