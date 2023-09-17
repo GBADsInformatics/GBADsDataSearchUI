@@ -11,7 +11,7 @@ function Home() {
       <MainpageNav></MainpageNav>
       <Container id="mainpage-main-content">
         <Image src="https://i0.wp.com/animalhealthmetrics.org/wp-content/uploads/2019/10/GBADs-LOGO-Black.png?ssl=1" fluid />
-        <p>Ask a question about data</p>
+        <h2>Livestock Information Portal</h2>
         <SearchBar></SearchBar>
       </Container>
     </div>

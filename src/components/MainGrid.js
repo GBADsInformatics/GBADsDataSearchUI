@@ -4,45 +4,56 @@ import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import { ButtonGroup, Container } from 'react-bootstrap';
 import "./styles/MainGrid.css";
-// import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-// import ToggleButton from 'react-bootstrap/ToggleButton';
-
 import CellData from './CellData';
-
 import Placeholder from 'react-bootstrap/Placeholder';
 
-function MainGrid() {
-    // const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-     
-    // const [checked, setChecked] = useState(false);
+import { createSearchParams, useNavigate } from 'react-router-dom';
+
+function MainGrid(props) {
+    const [selectedOption, setSelectedOption] = useState('data');
+    // Used to choose which option to see (Data, Literature, Query)
+    const [checked, setChecked] = useState(false);
 
     const [isLoading, setLoading] = useState(true);
     const [reqData, setRequestedData] = useState();
-    
 
-    try{
-        useEffect(() => {
-            axios.get("https://gbadske.org/meta-api/datasets?countries=Canada&species=Cattle").then(response => {
-            // axios.get("https://pokeapi.co/api/v2/pokemon/4").then(response => {
-            setRequestedData(response.data);
-            setLoading(false);
-            console.log(response.data);
-            });
-        }, []);
-    }
-    catch (exception) {
-        return(
-            <div>{exception.message}</div>
-        );
-    }
+    const navigate = useNavigate();
+
+    
+    const handleOptionClick = (option) => {
+        setSelectedOption(option);
+        navigate({
+            pathname: `/search/query/${option}`,
+            search: createSearchParams({
+              criteria: props.theSearch
+            }).toString()
+          })
+      };
+    
+    // TO BE USED ONCE THE API IS COMPLETE
+    // try{
+    //     useEffect(() => {
+    //         axios.get("https://gbadske.org/meta-api/datasets?countries=Canada&species=Cattle").then(response => {
+    //         // axios.get("https://pokeapi.co/api/v2/pokemon/4").then(response => {
+    //         setRequestedData(response.data);
+    //         setLoading(false);
+    //         console.log(response.data);
+    //         });
+    //     }, []);
+    // }
+    // catch (exception) {
+    //     return(
+    //         <div>{exception.message}</div>
+    //     );
+    // }
 
     if (isLoading) {
         
         return(
 
             <Container className='main-table'>
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-end inner-table">
                 <ButtonGroup>
                     {/* <ToggleButton
                         // className="mb-2"
@@ -54,8 +65,17 @@ function MainGrid() {
                         onChange={(e) => setChecked(e.currentTarget.checked)}
                     > Has PDF
                     </ToggleButton> */}
-                    <Button variant="outline-secondary">Filter</Button>{' '}
-                    <Button variant="outline-secondary">Sort By</Button>{' '}
+                    <Button
+                    className={selectedOption === 'data' ? 'main-option-button-selected' : 'main-option-button '}
+                    onClick={() => handleOptionClick('data')}>Data</Button>{' '}
+
+                    <Button
+                    className={selectedOption === 'literature' ? 'main-option-button-selected' : 'main-option-button '}
+                    onClick={() => handleOptionClick('literature')}>Literature</Button>{' '}
+                     <Button
+                    className={selectedOption === 'query' ? 'main-option-button-selected' : 'main-option-button '}
+                    onClick={() => handleOptionClick('query')}>Query</Button>{' '}
+                    {/* <Button className="main-option-button btn-outline">Query</Button>{' '} */}
                     {/* <Button variant="outline-secondary">Export As</Button>{' '} */}
                 </ButtonGroup>
             </div>

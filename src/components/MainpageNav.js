@@ -6,7 +6,7 @@ function MainNav() {
   return (
     <Navbar bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="/search">GBADs Data</Navbar.Brand>
+          <Navbar.Brand href="/search">GBADs</Navbar.Brand>
           <Nav className="me-auto-right">
             <Nav.Link href="/search/faq">FAQ</Nav.Link>
             <Nav.Link href="#features">GBADs</Nav.Link>

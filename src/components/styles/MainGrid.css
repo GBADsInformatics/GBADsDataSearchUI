@@ -1,9 +1,11 @@
 .main-table{
-    padding-top: 2%;
-    margin-top: 3%;
     border: 1px solid #dee2e6;
 }
 
+.inner-table{
+    padding-top: 2%;
+    margin-top: 3%;
+}
 
 .parent-cell:hover{
     background-color: #F1F1F1;
@@ -16,3 +18,20 @@
 .parent-cell-odd:hover{
     background-color: #d0cece !important;
 }
+
+.main-option-button {
+    background-color: rgba(244, 146, 46, 0.42) !important;
+    color: white;
+    border: 0.0px solid black !important;
+  }
+
+  .main-option-button-selected {
+    background-color: #F4922E !important;
+    color: white;
+    border: 0.0px solid black !important;
+  }
+
+.main-option-button:hover {
+    background-color: #F4922E !important;
+    color: white;
+  }

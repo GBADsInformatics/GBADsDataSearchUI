@@ -31,7 +31,7 @@ function SearchNav(props) {
       <Container className='nav-content'>
         <Row>
           <Col style={{marginTop: "1.2%"}}>
-          <Navbar.Brand href="/search">GBADs Data</Navbar.Brand>
+          <Navbar.Brand href="/search">GBADs</Navbar.Brand>
           </Col>
           <Col>
           <Nav className="me-auto fix-search-nav">

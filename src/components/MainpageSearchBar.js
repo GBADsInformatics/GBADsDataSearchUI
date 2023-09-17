@@ -20,7 +20,7 @@ const SearchBar = () => {
     // You can access the search query using e.target.elements.search.value
     console.log('Search query:', searchText);
     navigate({
-      pathname: '/search/query',
+      pathname: '/search/query/data',
       search: createSearchParams({
         criteria: searchText
       }).toString()
@@ -32,7 +32,7 @@ const SearchBar = () => {
     <Container className='main-search-container'>
         <Form onSubmit={handleSearch}>
         <div className="input-group">
-            <FormControl id="main-search-text" type="text" name="search" placeholder="Search" className="mr-sm-2 rounded-left mainpage-search" value={searchText} onChange={handleSearchChange} />
+            <FormControl id="main-search-text" type="text" name="search" placeholder="Search for Livestock Data" className="mr-sm-2 rounded-left mainpage-search" value={searchText} onChange={handleSearchChange} />
             <div className="input-group-append">
             <Button type="submit" variant="outline-secondary rounded-right" onClick={handleSearch} id="search-icon">
                 <FontAwesomeIcon icon={faSearch} />

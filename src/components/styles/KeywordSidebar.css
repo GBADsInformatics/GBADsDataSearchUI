@@ -1,0 +1,27 @@
+.keyword-sidebar-parent{
+    border: 1px solid #dee2e6;
+    padding: 10%;
+}
+
+.keyword-parent{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.keyword{
+    background-color: #F4922E;
+    border-radius: 5%;
+    color: white;
+    /* text-align: center; */
+    margin-top: 2%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.keyword *{
+    text-align: center;
+}
