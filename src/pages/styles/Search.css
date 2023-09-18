@@ -9,6 +9,24 @@
     justify-content:space-between;
 }
 
+.sidebar-loading{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar-loading-cell{
+    background-color: #F4922E !important;
+    border-radius: 5%;
+    color: white;
+    /* text-align: center; */
+    margin-top: 2%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     #organize-main-search{

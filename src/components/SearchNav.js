@@ -1,13 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 import { Navbar, Container, Nav, Form, Button, FormControl } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import "./styles/SearchNav.css";
 
+function IdentifyURL(){
+  try{
+    // Get the current URL
+    const currentUrl = window.location.href;
+    // Split the URL by '/' to extract the parts
+    const urlParts = currentUrl.split('/');
+    // Find the index of 'query' in the URL
+    const queryIndex = urlParts.indexOf('query');
+    // Check if 'query' is found in the URL
+    if (queryIndex !== -1 && queryIndex + 1 < urlParts.length) {
+      // Get the value after 'query'
+      var valueAfterQuery = urlParts[queryIndex + 1];
+      // Check if the value contains a '?'
+      if (valueAfterQuery.includes('?')) {
+        // Split the value to remove everything after '?'
+        valueAfterQuery = valueAfterQuery.split('?')[0];
+      }
+      return ("/" + valueAfterQuery);
+    } else {
+      return "/data";
+    }
+  }
+  catch (error){
+    console.log("ERROR:")
+    console.log(error)
+    return "/data";
+  }
+}
+
 function SearchNav(props) {
   const [searchText, setSearchText] = useState(props.search);
   const navigate = useNavigate();
+
 
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
@@ -15,15 +45,16 @@ function SearchNav(props) {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // Implement your search functionality here
-    // You can access the search query using e.target.elements.search.value
-    console.log('Search query:', searchText);
+    var path = '/search/query' + IdentifyURL();
+    console.log("RESULT:");
+    console.log(path);
     navigate({
-      pathname: '/search/query',
+      pathname: path,
       search: createSearchParams({
         criteria: searchText
       }).toString()
-    })
+    });
+    props.sendDataToParent(searchText);
   };
 
   return (
