@@ -6,9 +6,8 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 import "./styles/MainpageSearchBar.css";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const [searchText, setSearchText] = useState('');
-  const navigate = useNavigate();
 
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
@@ -19,12 +18,7 @@ const SearchBar = () => {
     // Implement your search functionality here
     // You can access the search query using e.target.elements.search.value
     console.log('Search query:', searchText);
-    navigate({
-      pathname: '/search/query/data',
-      search: createSearchParams({
-        criteria: searchText
-      }).toString()
-    })
+    props.recSearch(searchText);
   };
 
 

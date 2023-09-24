@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function MainNav() {
   return (
-    <Navbar bg="light" variant="light">
+    <Navbar bg="light" variant="light" fixed="top">
         <Container>
           <Navbar.Brand href="/search">GBADs</Navbar.Brand>
           <Nav className="me-auto-right">

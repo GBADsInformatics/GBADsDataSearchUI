@@ -23,12 +23,7 @@ function MainGrid(props) {
     
     const handleOptionClick = (option) => {
         setSelectedOption(option);
-        navigate({
-            pathname: `/search/query/${option}`,
-            search: createSearchParams({
-              criteria: props.theSearch
-            }).toString()
-          })
+        props.sendDataFromMaingrid(`/search/query/${option}`);
       };
     
     // TO BE USED ONCE THE API IS COMPLETE

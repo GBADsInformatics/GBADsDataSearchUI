@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { createSearchParams, useNavigate } from 'react-router-dom';
 import { Navbar, Container, Nav, Form, Button, FormControl } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -36,7 +35,6 @@ function IdentifyURL(){
 
 function SearchNav(props) {
   const [searchText, setSearchText] = useState(props.search);
-  const navigate = useNavigate();
 
 
   const handleSearchChange = (event) => {
@@ -46,15 +44,7 @@ function SearchNav(props) {
   const handleSearch = (e) => {
     e.preventDefault();
     var path = '/search/query' + IdentifyURL();
-    console.log("RESULT:");
-    console.log(path);
-    navigate({
-      pathname: path,
-      search: createSearchParams({
-        criteria: searchText
-      }).toString()
-    });
-    props.sendDataToParent(searchText);
+    props.sendDataToParent(path, searchText);
   };
 
   return (

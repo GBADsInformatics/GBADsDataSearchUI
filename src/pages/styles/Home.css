@@ -5,6 +5,9 @@
   
   
   #mainpage-main-content{
+    /* display: flex;
+    justify-content: center;
+    flex-direction: column; */
     margin-top: 15%;
   }
   
@@ -47,4 +50,25 @@
     .main-search-container{
       width: 100% !important;
     }
+    .hidden-keyword-options{
+      width: 90% !important;
+    }
+  }
+
+  .hidden-keyword-options{
+    position: fixed;
+    bottom: -100%;
+    width: 100vw;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    transition: bottom 0.5s ease-in-out;
+    z-index: 999;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .slide-up {
+    transform: translateY(0);
+    bottom: 0;
   }

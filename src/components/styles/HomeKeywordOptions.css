@@ -1,0 +1,40 @@
+.main-keyword-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+}
+
+.keyword-parent-homepage{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.keyword-homepage-selected{
+    flex: 1 1 0;
+    background-color: #F4922E !important;
+    border: #F4922E !important;
+    color: white;
+    margin-right: 25%;
+    margin-left: 25%;
+    border-radius: 5% !important;
+    /* text-align: center; */
+}
+
+.keyword-homepage-disabled{
+    background-color: #C4C4C4 !important;
+    border: #C4C4C4 !important;
+    margin-right: 25%;
+    margin-left: 25%;
+    border-radius: 5% !important;
+}
+
+.align-left{
+    margin-right: 100%;
+}

@@ -8,22 +8,64 @@ import { Container } from 'react-bootstrap';
 import KeywordSidebar from '../components/KeywordSidebar';
 import axios from 'axios';
 import Placeholder from 'react-bootstrap/Placeholder';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 
 function Search() {
     const [searchParams] = useSearchParams();
-
+    const navigate = useNavigate();
     const [searchWas, setSearchWas] = useState(searchParams.get('criteria'));
-    console.log(searchParams.get('criteria'));
-    const [keywords, setKeywords] = useState([]);
+    const [keywords, setKeywords] = useState(searchParams.get('keywordList').split(','));
+
+
+  const createParams = (aQuery) => {
+    const queryParams = {
+      criteria: aQuery,
+      keywordList: keywords
+    };
+    queryParams.keywordList = queryParams.keywordList.join(',');
+    return queryParams;
+  }
 
   // Function to receive keywords from SearchNav component
-  const receiveKeywordsFromChild = (theSearchQuery) => {
+  const receiveKeywordsFromChild = (path, theSearchQuery) => {
     // Update the keywords in the parent component's state
-    console.log("WE GOT IT:")
-    console.log(theSearchQuery);
     setSearchWas(theSearchQuery);
     fetchKeywordsFromApi(theSearchQuery);
+    
+    const queryParams = createParams(theSearchQuery);
+    console.log("FOLLOWING:")
+    console.log(theSearchQuery)
+    console.log(keywords);
+
+    navigate({
+      pathname: path,
+      search: createSearchParams(queryParams).toString()
+    });
   };
+
+  // Function to receive keywords from SearchNav component
+  const optionChange = (path) => {
+    console.log("New Options");
+    console.log(keywords);
+    console.log(path);
+
+    const queryParams = createParams(searchWas);
+    navigate({
+      pathname: path,
+      search: createSearchParams(queryParams).toString()
+    })
+  };
+
+  const refineApiResults = (result) => {
+    var mergedList = [];
+    for (var key in result) {
+      if (Array.isArray(result[key])) {
+        // Check if the property is an array
+        mergedList = mergedList.concat(result[key]);
+      }
+    }
+    return mergedList;  
+  }
 
   // Function to fetch keywords from an API
   const fetchKeywordsFromApi = async (theSearchQuery) => {
@@ -42,25 +84,24 @@ function Search() {
 
       const data = response.data;
       console.log(data);
-      setKeywords(data);
-      console.log("COUNT IS:")
-      console.log(data.length);
+      const refinedResults = refineApiResults(data);
+      setKeywords(refinedResults);
       // Call sendDataToParent to send keywords back to the parent
     } catch (error) {
       console.error('Error fetching keywords:', error);
     }
   };
 
-  useEffect(() => {
-    // Fetch keywords from the API once the component has loaded
-    fetchKeywordsFromApi(searchWas)
-      .then(() => {
-        console.log('Keywords fetched successfully:', keywords);
-      })
-      .catch((error) => {
-        console.error('Error fetching keywords:', error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // Fetch keywords from the API once the component has loaded
+  //   fetchKeywordsFromApi(searchWas)
+  //     .then(() => {
+  //       console.log('Keywords fetched successfully:', keywords);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching keywords:', error);
+  //     });
+  // }, []);
 
 
   return (
@@ -71,7 +112,7 @@ function Search() {
       />
       <Container id="organize-main-search">
         <Container style={{ width: '500px', paddingTop: '2%', marginTop: '3%' }}>
-        {keywords.length!=0 ? (
+        {keywords.length!=undefined ? (
             // Render the child component with the fetched data
             <KeywordSidebar keywords={keywords} />
         ) : (
@@ -85,7 +126,7 @@ function Search() {
         )}
         </Container>
         <Container id="main-grid-container" style={{ width: '2900px', paddingTop: '2%', marginTop: '3%' }}>
-          <MainGrid theSearch={searchWas} />
+          <MainGrid sendDataFromMaingrid={optionChange} theSearch={searchWas} />
         </Container>
       </Container>
     </div>
