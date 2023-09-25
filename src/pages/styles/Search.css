@@ -44,3 +44,10 @@
         justify-content: center;
     }
   }
+
+  .keyword-sidebar-main-parent{
+    width: 500px; 
+    padding-top: 2%;
+    margin-top: 3%;
+  }
+

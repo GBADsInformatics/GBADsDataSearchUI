@@ -111,7 +111,7 @@ function Search() {
         sendDataToParent={receiveKeywordsFromChild} // Pass the function to the child component
       />
       <Container id="organize-main-search">
-        <Container style={{ width: '500px', paddingTop: '2%', marginTop: '3%' }}>
+        <Container className='keyword-sidebar-main-parent'>
         {keywords.length!=undefined ? (
             // Render the child component with the fetched data
             <KeywordSidebar keywords={keywords} />
