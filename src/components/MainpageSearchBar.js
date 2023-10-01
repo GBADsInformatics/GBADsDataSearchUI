@@ -26,11 +26,11 @@ const SearchBar = (props) => {
     <Container className='main-search-container'>
         <Form onSubmit={handleSearch}>
         <div className="input-group">
-            <FormControl id="main-search-text" type="text" name="search" placeholder="Search for Livestock Data" className="mr-sm-2 rounded-left mainpage-search" value={searchText} onChange={handleSearchChange} />
+            <FormControl id="main-search-text" type="text" name="search" placeholder="Search for Livestock Data" className="mr-sm-2 rounded-end mainpage-search" value={searchText} onChange={handleSearchChange} />
             <div className="input-group-append">
-            <Button type="submit" variant="outline-secondary rounded-right" onClick={handleSearch} id="search-icon">
-                <FontAwesomeIcon icon={faSearch} />
-            </Button>
+              <Button type="submit" variant="outline-secondary" className='rounded-start' onClick={handleSearch} id="search-icon">
+                  <FontAwesomeIcon icon={faSearch} />
+              </Button>
             </div>
         </div>
         <Button variant="secondary" id="search-g-data" onClick={handleSearch}>Search GBADs Data</Button>
