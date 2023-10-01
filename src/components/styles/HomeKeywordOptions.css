@@ -16,8 +16,20 @@
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: center;   
+}
+
+#query-bar{
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
     
+    border-top-right-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
+}
+
+#update-query-b{
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
 }
 
 .keyword-home-form{

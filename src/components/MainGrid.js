@@ -6,7 +6,9 @@ import { ButtonGroup, Container } from 'react-bootstrap';
 import "./styles/MainGrid.css";
 import Button from 'react-bootstrap/Button';
 import CellData from './CellData';
-import Placeholder from 'react-bootstrap/Placeholder';
+import DatasetCell from './DatasetCell';
+
+import LoadingTable from './LoadingTable';
 
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
@@ -19,6 +21,17 @@ function MainGrid(props) {
     const [reqData, setRequestedData] = useState();
 
     const navigate = useNavigate();
+    
+    // Used to show which row was selected
+    const [selectedRowIndex, setSelectedRowIndex] = useState(null);
+
+    const handleRowClick = (rowIndex) => {
+        setSelectedRowIndex(rowIndex);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedRowIndex(null); // Reset the selectedRowIndex to close the modal
+    };
 
     
     const handleOptionClick = (option) => {
@@ -55,16 +68,6 @@ function MainGrid(props) {
             <Container className='main-table'>
             <div className="d-flex justify-content-end inner-table">
                 <ButtonGroup>
-                    {/* <ToggleButton
-                        // className="mb-2"
-                        id="toggle-check"
-                        type="checkbox"
-                        variant="outline-primary"
-                        checked={checked}
-                        value="1"
-                        onChange={(e) => setChecked(e.currentTarget.checked)}
-                    > Has PDF
-                    </ToggleButton> */}
                     <Button
                     className={selectedOption === 'data' ? 'main-option-button-selected' : 'main-option-button '}
                     onClick={() => handleOptionClick('data')}>Data</Button>{' '}
@@ -79,75 +82,8 @@ function MainGrid(props) {
                     {/* <Button variant="outline-secondary">Export As</Button>{' '} */}
                 </ButtonGroup>
             </div>
-            <Table responsive>
-                <thead>
-                    <tr>
-                        <th style={{color: "grey"}}>Dataset</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td className='parent-cell'>
-                        <div>
-                            <div className='title-and-desc'>
-                                <Placeholder as="p" animation="glow">
-                                    <Placeholder xs={4} />
-                                </Placeholder>
-                                <Placeholder as="p" animation="glow">
-                                    <Placeholder xs={10} />
-                                </Placeholder>
-                            </div>
-                            <div className='year-and-csv-loading-parent'>
-                            <Placeholder as="p" animation="glow">
-                                <Placeholder xs={2} style={{marginLeft: "20%"}}/>
-                                <Placeholder xs={2} style={{marginLeft: "25%"}}/>
-                            </Placeholder>
-                            </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                    <td className='parent-cell'>
-                        <div>
-                            <div className='title-and-desc'>
-                                <Placeholder as="p" animation="glow">
-                                    <Placeholder xs={4} />
-                                </Placeholder>
-                                <Placeholder as="p" animation="glow">
-                                    <Placeholder xs={10} />
-                                </Placeholder>
-                            </div>
-                            <div className='year-and-csv-loading-parent'>
-                            <Placeholder as="p" animation="glow">
-                                <Placeholder xs={2} style={{marginLeft: "20%"}}/>
-                                <Placeholder xs={2} style={{marginLeft: "25%"}}/>
-                            </Placeholder>
-                            </div>
-                        </div>
-                        </td>
-                    </tr>
-                    <tr>
-                    <td className='parent-cell'>
-                        <div>
-                            <div className='title-and-desc'>
-                                <Placeholder as="p" animation="glow">
-                                    <Placeholder xs={4} />
-                                </Placeholder>
-                                <Placeholder as="p" animation="glow">
-                                    <Placeholder xs={10} />
-                                </Placeholder>
-                            </div>
-                            <div className='year-and-csv-loading-parent'>
-                            <Placeholder as="p" animation="glow">
-                                <Placeholder xs={2} style={{marginLeft: "20%"}}/>
-                                <Placeholder xs={2} style={{marginLeft: "25%"}}/>
-                            </Placeholder>
-                            </div>
-                        </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </Table>
+            {/* The element below holds the loading table */}
+            <LoadingTable/>
         </Container>
         );
     }
@@ -166,16 +102,6 @@ function MainGrid(props) {
         <Container className='main-table'>
             <div className="d-flex justify-content-end inner-table">
                 <ButtonGroup>
-                    {/* <ToggleButton
-                        // className="mb-2"
-                        id="toggle-check"
-                        type="checkbox"
-                        variant="outline-primary"
-                        checked={checked}
-                        value="1"
-                        onChange={(e) => setChecked(e.currentTarget.checked)}
-                    > Has PDF
-                    </ToggleButton> */}
                     <Button
                     className={selectedOption === 'data' ? 'main-option-button-selected' : 'main-option-button '}
                     onClick={() => handleOptionClick('data')}>Data</Button>{' '}
@@ -193,33 +119,45 @@ function MainGrid(props) {
             <Table responsive>
                 <thead>
                     <tr>
-                        <th style={{color: "grey"}}>Paper title</th>
+                        <th style={{color: "grey"}}>Dataset</th>
+                        <th style={{color: "grey"}}>Description</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {reqData.map((item) => (
-                        <tr>
+                    {reqData.map((item, index) => (
+                        <tr className='data-row' key={index} onClick={() => handleRowClick(index)}>
                             <td className='parent-cell'>
-                            <CellData 
-                            title={item.name}
-                            desc={item.description}
-                            startYear= "2018" 
-                            csvDownloadlink={item.contentUrl[1]}
-                            nameOfDataSet={item.sourceTable} // Fix for future
-                            authors="Example authors" // Fix for future
-                            nameOfDataSource="Example name of data source" // Fix this for future
-                            endYear="2021" // Fix this for future
-                            tableName={item.sourceTable} 
-                            apiCall="Example API Call script" // Fix for future
-                            metadataDownloadLink={item.contentUrl[0]} // Not sure this is right
-                            columnsIncluded="Example columns included" // Fix for future
-                            measured="Example species 1, species 2, etc"
-                            spatialRange={item.spatialCoverage}
-                            temporalRange={item.temporalCoverage}
-                            source="Example source"
-                            contactPoint="Example contact point"
-                            licence={item.license}
-                            />
+                                <DatasetCell
+                                title={item.name}
+                                authors="Example authors"
+                                source="Example source"
+                                startYear= "2018"
+                                endYear= "2021"
+                                />
+                            </td>
+                            <td className='parent-cell'>
+                                <CellData 
+                                title={item.name}
+                                desc={item.description}
+                                startYear= "2018" 
+                                csvDownloadlink={item.contentUrl[1]}
+                                nameOfDataSet={item.sourceTable} // Fix for future
+                                authors="Example authors" // Fix for future
+                                nameOfDataSource="Example name of data source" // Fix this for future
+                                endYear="2021" // Fix this for future
+                                tableName={item.sourceTable} 
+                                apiCall="Example API Call script" // Fix for future
+                                metadataDownloadLink={item.contentUrl[0]} // Not sure this is right
+                                columnsIncluded="Example columns included" // Fix for future
+                                measured="Example species 1, species 2, etc"
+                                spatialRange={item.spatialCoverage}
+                                temporalRange={item.temporalCoverage}
+                                source="Example source"
+                                contactPoint="Example contact point"
+                                licence={item.license}
+                                isOpen={selectedRowIndex === index}
+                                onCloseModal={handleCloseModal}
+                                />
                             </td>
                         </tr>
                     ))}

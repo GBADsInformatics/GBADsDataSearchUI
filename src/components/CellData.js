@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
     faCalendar,
@@ -37,9 +37,9 @@ function CellData(props){
     const descText = ShortenDesc(props.desc);
 
 
-    var formatDateRange = props.startYear + ' - ' + props.endYear
+    // var formatDateRange = props.startYear + ' - ' + props.endYear
 
-    const [show, setShow] = useState(false);
+    const [showModal, setShowModal] = useState(props.isOpen); // Initialize the modal state with the isOpen prop
 
     const [copied, setCopy] = useState(false);
 
@@ -53,24 +53,24 @@ function CellData(props){
         }, 3000);
       };
 
-    const handleClose = () => setShow(false);
-    const handleShow = (event) => {
-        return setShow(true);
-    };
-
+      useEffect(() => {
+        // Set the showModal state when isOpen prop changes
+        setShowModal(props.isOpen);
+      }, [props.isOpen]);
+    
+      const handleCloseModal = () => {
+        // Close the modal and notify the parent component
+        setShowModal(false);
+        props.onCloseModal();
+      };
 
     return(
         <>
         <div>
-            <div onClick={handleShow} className='title-and-desc'>
-                <p><b>{props.title}</b></p>
+            <div className='title-and-desc'>
                 <p>{descText}</p>
             </div>
             <div className='align-year-and-link'>
-                <div className='align-icon-left'>
-                    <FontAwesomeIcon icon={faCalendar} style={{ color: 'black', marginRight: "4%", marginTop: "2.2%" }}/>
-                    <p style={{display: "inline"}}>{formatDateRange}</p>
-                </div>
                 <div id="quick-link-download">
                     <a href={props.csvDownloadlink} download>CSV
                         <FontAwesomeIcon icon={faCloudDownload} style={{ color: 'black'}}/>
@@ -79,7 +79,7 @@ function CellData(props){
             </div>
         </div>
 
-        <Modal show={show} onHide={handleClose} animation={true} size="lg">
+        <Modal show={showModal} onHide={handleCloseModal} animation={true} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>{props.title}</Modal.Title>
         </Modal.Header>
@@ -154,7 +154,7 @@ function CellData(props){
             </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleCloseModal}>
             Close
           </Button>
         </Modal.Footer>

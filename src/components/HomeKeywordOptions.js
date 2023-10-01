@@ -103,8 +103,9 @@ function HomeKeywordOptions(props){
                         value={query}
                         onChange={handleInputChange}
                         onSubmit={updateQuery}
+                        id="query-bar"
                         />
-                        <Button variant="outline-secondary" style={{borderRadius: '5%'}} onClick={updateQuery}>Update Query</Button>
+                        <Button variant="outline-secondary rounded-start" style={{borderRadius: '5%'}} onClick={updateQuery} id="update-query-b">Update Query</Button>
                     </InputGroup>
                 </Form.Group>
                 <Form.Group className="mb-3 keyword-home-form">
