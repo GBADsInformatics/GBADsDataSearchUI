@@ -27,21 +27,26 @@ function MainGrid(props) {
       };
     
     // TO BE USED ONCE THE API IS COMPLETE
-    // try{
-    //     useEffect(() => {
-    //         axios.get("https://gbadske.org/meta-api/datasets?countries=Canada&species=Cattle").then(response => {
-    //         // axios.get("https://pokeapi.co/api/v2/pokemon/4").then(response => {
-    //         setRequestedData(response.data);
-    //         setLoading(false);
-    //         console.log(response.data);
-    //         });
-    //     }, []);
-    // }
-    // catch (exception) {
-    //     return(
-    //         <div>{exception.message}</div>
-    //     );
-    // }
+    useEffect(() => {
+    try {
+      axios.get("https://gbadske.org/meta-api/datasets?countries=Canada&species=Cattle")
+        .then(response => {
+          const originalData = response.data;
+          // Duplicate the data
+          const duplicatedData = [...originalData, ...originalData];
+          
+          // Merge the duplicated data with the original data
+          const mergedData = [...originalData, ...duplicatedData];
+          
+          // Set the merged data in the state
+          setRequestedData(mergedData);
+          setLoading(false);
+          console.log(mergedData);
+        });
+    } catch (exception) {
+      console.error(exception);
+    }
+  }, []);
 
     if (isLoading) {
         
@@ -159,7 +164,7 @@ function MainGrid(props) {
 
     return (
         <Container className='main-table'>
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-end inner-table">
                 <ButtonGroup>
                     {/* <ToggleButton
                         // className="mb-2"
@@ -171,8 +176,17 @@ function MainGrid(props) {
                         onChange={(e) => setChecked(e.currentTarget.checked)}
                     > Has PDF
                     </ToggleButton> */}
-                    <Button variant="outline-secondary">Filter</Button>{' '}
-                    <Button variant="outline-secondary">Sort By</Button>{' '}
+                    <Button
+                    className={selectedOption === 'data' ? 'main-option-button-selected' : 'main-option-button '}
+                    onClick={() => handleOptionClick('data')}>Data</Button>{' '}
+
+                    <Button
+                    className={selectedOption === 'literature' ? 'main-option-button-selected' : 'main-option-button '}
+                    onClick={() => handleOptionClick('literature')}>Literature</Button>{' '}
+                     <Button
+                    className={selectedOption === 'query' ? 'main-option-button-selected' : 'main-option-button '}
+                    onClick={() => handleOptionClick('query')}>Query</Button>{' '}
+                    {/* <Button className="main-option-button btn-outline">Query</Button>{' '} */}
                     {/* <Button variant="outline-secondary">Export As</Button>{' '} */}
                 </ButtonGroup>
             </div>
