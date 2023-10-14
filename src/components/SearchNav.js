@@ -48,7 +48,7 @@ function SearchNav(props) {
   };
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" sticky='top'>
       <Container className='nav-content'>
         <Row>
           <Col style={{marginTop: "1.2%"}}>
@@ -57,8 +57,8 @@ function SearchNav(props) {
           <Col>
           <Nav className="me-auto fix-search-nav">
             <Nav.Link href="/search/faq">FAQ</Nav.Link>
-            <Nav.Link href="#features">GBADs</Nav.Link>
-            <Nav.Link href="#pricing">Informatics</Nav.Link>
+            <Nav.Link href="https://animalhealthmetrics.org/">GBADs</Nav.Link>
+            <Nav.Link href="https://www.gbadske.org/">Informatics</Nav.Link>
           </Nav>
           </Col>
         </Row>

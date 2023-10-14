@@ -34,7 +34,10 @@ function ShortenDesc(text){
 }
 
 function CellData(props){
-    const descText = ShortenDesc(props.desc);
+    var descText = '';
+    if (props.desc != undefined){
+        descText = ShortenDesc(props.desc);
+    }
 
 
     // var formatDateRange = props.startYear + ' - ' + props.endYear
@@ -46,7 +49,7 @@ function CellData(props){
     const copyText = () => {
         setCopy(true);
 
-        navigator.clipboard.writeText("testing GBADs")
+        navigator.clipboard.writeText("GBADs Beta version, copying to clipboard coming soon!")
     
         setTimeout(() => {
             setCopy(false);
@@ -105,15 +108,19 @@ function CellData(props){
                     </div>
                     <Container style={{textAlign: "center"}}>
                         <ButtonGroup className="mb-2">
-                            <Button variant="outline-primary" onClick={() => window.open(props.csvDownloadlink, '_blank')}>
-                                CSV
-                            </Button>
+                            {(props.csvDownloadlink!=undefined) &&(
+                                <Button variant="outline-primary" onClick={() => window.open(props.csvDownloadlink, '_blank')}>
+                                    CSV
+                                </Button>
+                            )}
                             <Button variant={ copied ? "success" : "outline-secondary"} onClick={copyText}>
                                 { copied ? "Copied to clipboard!" : "API CALL" }
                             </Button>
-                            <Button variant="outline-secondary" onClick={() => window.open(props.metadataDownloadLink, '_blank')}>
-                                Download metadata
-                            </Button>
+                            {(props.csvDownloadlink!=undefined) &&(
+                                <Button variant="outline-secondary" onClick={() => window.open(props.metadataDownloadLink, '_blank')}>
+                                    Download metadata
+                                </Button>
+                            )}
                         </ButtonGroup>
                     </Container>
                     <hr/>

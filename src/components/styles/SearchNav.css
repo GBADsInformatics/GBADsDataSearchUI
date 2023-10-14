@@ -3,6 +3,8 @@
     flex-direction: row !important;
 }
 
+
+
 @media only screen and (max-width: 991px) {
     /* For mobile phones: */
     .fix-search-nav *{

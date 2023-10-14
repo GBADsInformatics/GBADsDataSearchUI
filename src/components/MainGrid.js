@@ -12,6 +12,7 @@ import LoadingTable from './LoadingTable';
 
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
+
 function MainGrid(props) {
     const [selectedOption, setSelectedOption] = useState('data');
     // Used to choose which option to see (Data, Literature, Query)
@@ -33,10 +34,34 @@ function MainGrid(props) {
         setSelectedRowIndex(null); // Reset the selectedRowIndex to close the modal
     };
 
+    const optionChangeApiCall = () => {
+        // ONCE WE HAVE A WAY TO CHECK WHERE TO SEARCH FOR LITERATURE, QUERY, AND DATA WE CAN MODIFY THE CALL
+        try {
+            axios.get("https://gbadske.org/meta-api/datasets?countries=Canada&species=Cattle")
+              .then(response => {
+                const originalData = response.data;
+                // Duplicate the data
+                const duplicatedData = [...originalData, ...originalData];
+                
+                // Merge the duplicated data with the original data
+                const mergedData = [...originalData, ...duplicatedData];
+                
+                // Set the merged data in the state
+                setRequestedData(mergedData);
+                setLoading(false);
+                console.log(mergedData);
+              });
+          } catch (exception) {
+            console.error(exception);
+          }
+    }
+
     
     const handleOptionClick = (option) => {
         setSelectedOption(option);
         props.sendDataFromMaingrid(`/search/query/${option}`);
+        setLoading(true);
+        optionChangeApiCall();
       };
     
     // TO BE USED ONCE THE API IS COMPLETE
@@ -140,14 +165,14 @@ function MainGrid(props) {
                                 title={item.name}
                                 desc={item.description}
                                 startYear= "2018" 
-                                csvDownloadlink={item.contentUrl[1]}
+                                csvDownloadlink={item.contentURL ? item.contentURL[1] : undefined}
                                 nameOfDataSet={item.sourceTable} // Fix for future
                                 authors="Example authors" // Fix for future
                                 nameOfDataSource="Example name of data source" // Fix this for future
                                 endYear="2021" // Fix this for future
                                 tableName={item.sourceTable} 
                                 apiCall="Example API Call script" // Fix for future
-                                metadataDownloadLink={item.contentUrl[0]} // Not sure this is right
+                                metadataDownloadLink={item.contentURL ? item.contentURL[0] : undefined} // Not sure this is right
                                 columnsIncluded="Example columns included" // Fix for future
                                 measured="Example species 1, species 2, etc"
                                 spatialRange={item.spatialCoverage}

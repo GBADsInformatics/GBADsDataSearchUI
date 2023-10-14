@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import FAQ from './pages/Faq';
+import Footer from './components/Footer';
 
 const App = () => {
  return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/search/query/query" element={<Search />} />
           <Route path="/search/faq" element={<FAQ />} />
        </Routes>
+       <Footer></Footer>
     </>
  );
 };

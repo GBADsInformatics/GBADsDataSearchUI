@@ -56,7 +56,7 @@
   }
 
   .keyword-sidebar-main-parent{
-    padding-top: 2%;
-    margin-top: 3%;
+    padding-top: 2% !important;
+    margin-top: 3% !important;
   }
 
