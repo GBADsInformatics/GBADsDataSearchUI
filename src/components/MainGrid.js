@@ -165,14 +165,14 @@ function MainGrid(props) {
                                 title={item.name}
                                 desc={item.description}
                                 startYear= "2018" 
-                                csvDownloadlink={item.contentURL ? item.contentURL[1] : undefined}
+                                csvDownloadlink={item.contentUrl ? item.contentUrl[1] : undefined}
                                 nameOfDataSet={item.sourceTable} // Fix for future
                                 authors="Example authors" // Fix for future
                                 nameOfDataSource="Example name of data source" // Fix this for future
                                 endYear="2021" // Fix this for future
                                 tableName={item.sourceTable} 
                                 apiCall="Example API Call script" // Fix for future
-                                metadataDownloadLink={item.contentURL ? item.contentURL[0] : undefined} // Not sure this is right
+                                metadataDownloadLink={item.contentUrl ? item.contentUrl[0] : undefined} // Not sure this is right
                                 columnsIncluded="Example columns included" // Fix for future
                                 measured="Example species 1, species 2, etc"
                                 spatialRange={item.spatialCoverage}
