@@ -6,7 +6,7 @@
 #organize-main-search{
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
 }
 
 .sidebar-loading{
@@ -60,3 +60,8 @@
     margin-top: 3% !important;
   }
 
+  #main-grid-container{
+    width: 2900px;
+    padding-top: 2%;
+    margin-top: 3%;
+  }

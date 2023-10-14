@@ -125,7 +125,7 @@ function Search() {
             </div>
         )}
         </Container>
-        <Container id="main-grid-container" style={{ width: '2900px', paddingTop: '2%', marginTop: '3%' }}>
+        <Container id="main-grid-container">
           <MainGrid sendDataFromMaingrid={optionChange} theSearch={searchWas} />
         </Container>
       </Container>

@@ -10,6 +10,10 @@
     .fix-search-nav *{
         margin-right: 5% !important;
     }
+    #search-nav-text{
+        display: flex;
+        flex-direction: row;
+    }
   }
 
   @media only screen and (max-width: 768px) {
