@@ -20,7 +20,8 @@ function HomeKeywordOptions(props){
     const navigate = useNavigate();
 
     // Just a list of all the keywords rather than an object
-    const collectiveKeywordList = countries.concat(species, years);
+    const [collectiveKeywordList, setCollectiveKeywordList] = useState([]);
+    // const collectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
 
     const handleInputChange = (e) => {
         setQuery(e.target.value);
@@ -47,9 +48,10 @@ function HomeKeywordOptions(props){
         }
     };
 
-    const updateQuery = (e) => {
+    const updateQuery = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior
-        fetchKeywordsFromApi(query);
+        await fetchKeywordsFromApi(query);
+        resetButtonStates();
     }
 
     // useEffect(() => {
@@ -57,12 +59,23 @@ function HomeKeywordOptions(props){
     //     keywords = props.keywords;
     //   }, []);
 
-    const initialState = collectiveKeywordList.reduce((acc, option) => {
-        acc[option] = true;
-        return acc;
-      }, {});
+    // const initialState = collectiveKeywordList.reduce((acc, option) => {
+    //     acc[option] = true;
+    //     return acc;
+    //   }, {});
 
-    const [buttonStates, setButtonStates] = useState(initialState);
+    
+    const [buttonStates, setButtonStates] = useState({});
+    // const [buttonStates, setButtonStates] = useState(initialState);
+
+
+    const resetButtonStates = () => {
+        var newState = collectiveKeywordList.reduce((acc, option) => {
+            acc[option] = true;
+            return acc;
+          }, {});
+          setButtonStates(newState);
+    }
     
     // Function to handle button click and update the state
     const handleOptionClick = (value) => {
@@ -90,6 +103,20 @@ function HomeKeywordOptions(props){
             search: createSearchParams(queryParams).toString()
             })
     }
+
+    useEffect(() => {
+        const updatedCollectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
+        setCollectiveKeywordList(updatedCollectiveKeywordList);
+      }, [keywords]);
+
+      useEffect(() => {
+        const initialState = collectiveKeywordList.reduce((acc, option) => {
+          acc[option] = true;
+          return acc;
+        }, {});
+      
+        setButtonStates(initialState);
+      }, [collectiveKeywordList]);
 
 
     return(
