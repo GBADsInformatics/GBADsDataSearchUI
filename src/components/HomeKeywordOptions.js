@@ -14,9 +14,9 @@ import { keyboard } from '@testing-library/user-event/dist/keyboard';
 function HomeKeywordOptions(props){
     const [query, setQuery] = useState(props.query);
     const [keywords, setKeywords] = useState(props.keywords);
-    const countries = keywords.country;
+    const countries = keywords.countries;
     const species = keywords.species;
-    const years = keywords.year;
+    const years = keywords.years;
     const navigate = useNavigate();
 
     // Just a list of all the keywords rather than an object
