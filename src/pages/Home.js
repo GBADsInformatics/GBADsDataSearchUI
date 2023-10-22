@@ -51,7 +51,7 @@ function Home() {
       <MainpageNav></MainpageNav>
       <Container id="mainpage-main-content">
         <Container>
-          <Image src="https://i0.wp.com/animalhealthmetrics.org/wp-content/uploads/2019/10/GBADs-LOGO-Black.png?ssl=1" fluid />
+          <Image id="main-logo" src={process.env.PUBLIC_URL + '/imgs/GBADsLogoRedesign.webp'} alt="GBADs logo" fluid />
           <h2>Livestock Information Portal</h2>
           <SearchBar recSearch={receiveSearchFromChild}></SearchBar>
         </Container>

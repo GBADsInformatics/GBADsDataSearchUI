@@ -3,12 +3,15 @@
     /* margin-top: 15%; */
   }
   
-  
+  #main-logo{
+    width: 360px;
+  }
+
   #mainpage-main-content{
     /* display: flex;
     justify-content: center;
     flex-direction: column; */
-    margin-top: 15%;
+    margin-top: 10%;
   }
   
   @media (prefers-reduced-motion: no-preference) {
