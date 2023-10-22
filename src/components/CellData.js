@@ -42,7 +42,7 @@ function CellData(props){
 
     // var formatDateRange = props.startYear + ' - ' + props.endYear
 
-    const [showModal, setShowModal] = useState(props.isOpen); // Initialize the modal state with the isOpen prop
+    const [showModal, setShowModal] = useState(false); // Initialize the modal state with the isOpen prop
 
     const [copied, setCopy] = useState(false);
 
@@ -56,16 +56,24 @@ function CellData(props){
         }, 3000);
       };
 
-      useEffect(() => {
-        // Set the showModal state when isOpen prop changes
-        setShowModal(props.isOpen);
-      }, [props.isOpen]);
+      const openModal = () => {
+        setShowModal(true);
+      };
+
     
       const handleCloseModal = () => {
-        // Close the modal and notify the parent component
+        console.log('Close Button Clicked (CELLDATA)'); // Add this line for debugging
         setShowModal(false);
         props.onCloseModal();
-      };
+    };
+
+    useEffect(() => {
+        if (props.isOpen === true) {
+          // Execute the desired function in response to the message
+          openModal();
+        }
+      }, [props.isOpen]);
+      
 
     return(
         <>

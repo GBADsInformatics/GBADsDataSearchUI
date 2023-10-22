@@ -25,13 +25,23 @@ function MainGrid(props) {
     
     // Used to show which row was selected
     const [selectedRowIndex, setSelectedRowIndex] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
 
-    const handleRowClick = (rowIndex) => {
-        setSelectedRowIndex(rowIndex);
-    };
+      const handleRowClick = (rowIndex) => {
+        if (!modalOpen) {
+            console.log(selectedRowIndex);
+            setSelectedRowIndex(rowIndex);
+            console.log("OPEN");
+            console.log(selectedRowIndex);
+            setModalOpen(true);
+        }
+      };
 
     const handleCloseModal = () => {
+        console.log('Close Modal Clicked -> HERE'); // Add this line for debugging
         setSelectedRowIndex(null); // Reset the selectedRowIndex to close the modal
+        console.log(selectedRowIndex);
+        setModalOpen(false);
     };
 
     const optionChangeApiCall = () => {
@@ -85,6 +95,11 @@ function MainGrid(props) {
       console.error(exception);
     }
   }, []);
+
+  useEffect(() => {
+    // Add a console log to help with debugging
+    console.log('SelectedRowIndex:', selectedRowIndex);
+}, [selectedRowIndex]);
 
     if (isLoading) {
         
