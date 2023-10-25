@@ -18,12 +18,12 @@ tr:hover td{
   }
 
   .main-option-button-selected {
-    background-color: #F4922E !important;
+    background-color: #F7931D !important;
     color: white;
     border: 0.0px solid black !important;
   }
 
 .main-option-button:hover {
-    background-color: #F4922E !important;
+    background-color: #F7931D !important;
     color: white;
   }

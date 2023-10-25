@@ -10,12 +10,40 @@ import axios from 'axios';
 import Placeholder from 'react-bootstrap/Placeholder';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
+function IdentifyURL(){
+  try{
+    // Get the current URL
+    const currentUrl = window.location.href;
+    // Split the URL by '/' to extract the parts
+    const urlParts = currentUrl.split('/');
+    // Find the index of 'query' in the URL
+    const queryIndex = urlParts.indexOf('query');
+    // Check if 'query' is found in the URL
+    if (queryIndex !== -1 && queryIndex + 1 < urlParts.length) {
+      // Get the value after 'query'
+      var valueAfterQuery = urlParts[queryIndex + 1];
+      // Check if the value contains a '?'
+      if (valueAfterQuery.includes('?')) {
+        // Split the value to remove everything after '?'
+        valueAfterQuery = valueAfterQuery.split('?')[0];
+      }
+      return ("/" + valueAfterQuery);
+    } else {
+      return "/data";
+    }
+  }
+  catch (error){
+    console.log("ERROR:")
+    console.log(error)
+    return "/data";
+  }
+}
+
 function Search() {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const [searchWas, setSearchWas] = useState(searchParams.get('criteria'));
-    const [keywords, setKeywords] = useState(searchParams.get('keywordList').split(','));
-
+    const [keywords, setKeywords] = useState(searchParams.get('keywordList') ? searchParams.get('keywordList').split(',') : []);
 
   const createParams = (aQuery) => {
     const queryParams = {
@@ -24,6 +52,19 @@ function Search() {
     };
     queryParams.keywordList = queryParams.keywordList.join(',');
     return queryParams;
+  }
+
+  const resetKeywords = (keywordsFromChild) =>{
+    setKeywords(keywordsFromChild);
+    const queryParams = {
+      criteria: searchWas,
+      keywordList: keywordsFromChild
+    };
+    queryParams.keywordList = queryParams.keywordList.join(',');
+    navigate({
+      pathname: '/search/query' + IdentifyURL(),
+      search: createSearchParams(queryParams).toString()
+    })
   }
 
   // Function to receive keywords from SearchNav component
@@ -103,6 +144,11 @@ function Search() {
   //     });
   // }, []);
 
+  useEffect(() => {
+    console.log("KEYWORDS RESET");
+    console.log(keywords);
+}, [keywords]);
+
 
   return (
     <div>
@@ -114,7 +160,7 @@ function Search() {
         <Container className='keyword-sidebar-main-parent'>
         {keywords.length!=undefined ? (
             // Render the child component with the fetched data
-            <KeywordSidebar keywords={keywords} />
+            <KeywordSidebar setNewKeywords={resetKeywords} keywords={keywords} />
         ) : (
             // Optionally, display a loading message or spinner while fetching data
             <div className="keyword-sidebar-parent sidebar-loading">
