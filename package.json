@@ -1,6 +1,7 @@
 {
-  "name": "gbads-s3-ui",
+  "name": "gbads-tail",
   "version": "0.1.0",
+  "author": "Flex Consulting Solutions Inc.",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
