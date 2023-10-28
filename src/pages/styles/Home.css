@@ -61,7 +61,7 @@
   .hidden-keyword-options{
     position: fixed;
     bottom: -100%;
-    width: 100vw;
+    width: 100%;
     left: 0;
     right: 0;
     background-color: #ffffff;

@@ -58,7 +58,7 @@
 }
 
 .align-left{
-    margin-right: 100%;
+    margin-right: 85%;
 }
 
 /* CSS */
@@ -103,6 +103,15 @@
 }
 
 
+#add-button-home{
+    background-color: #F7931D;
+    border: #F7931D;
+}
 
+#add-button-home:hover{
+    background-color: #f3ac5b;
+}
 
-
+/* .check{
+    border: 1px solid red;
+} */

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import "./styles/HomeKeywordOptions.css";
-import { Form, FormControl, Button } from 'react-bootstrap';
+import { Form, FormControl, Button, Modal } from 'react-bootstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
 import axios from 'axios';
 import 'animate.css';
@@ -14,17 +14,43 @@ import { keyboard } from '@testing-library/user-event/dist/keyboard';
 function HomeKeywordOptions(props){
     const [query, setQuery] = useState(props.query);
     const [keywords, setKeywords] = useState(props.keywords);
-    const countries = keywords.countries;
-    const species = keywords.species;
-    const years = keywords.years;
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+    const [newKeyword, setNewKeyword] = useState("");
 
     // Just a list of all the keywords rather than an object
     const [collectiveKeywordList, setCollectiveKeywordList] = useState([]);
     // const collectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
 
+    const openModal = () => {
+        setNewKeyword(""); // Clear the input field when opening the modal
+        setShowModal(true);
+    };
+
+    const closeModal = () => setShowModal(false);
+
     const handleInputChange = (e) => {
         setQuery(e.target.value);
+    };
+
+    const saveChanges = () => {
+        console.log("SAVE CHANGES");
+        console.log(collectiveKeywordList);
+        if (newKeyword) {
+            // Update the list of keywords with the new one
+            setCollectiveKeywordList([...collectiveKeywordList, newKeyword]);
+        }
+        closeModal();
+        console.log("Child:");
+        console.log(newKeyword);
+        console.log(collectiveKeywordList);
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter" && showModal===true) {
+            e.preventDefault(); // Prevent page reload
+            saveChanges(); // Execute the saveChanges function
+        }
     };
 
     // Function to fetch keywords from an API
@@ -105,8 +131,10 @@ function HomeKeywordOptions(props){
     }
 
     useEffect(() => {
-        const updatedCollectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
-        setCollectiveKeywordList(updatedCollectiveKeywordList);
+        if (keywords.countries !== undefined){
+            const updatedCollectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
+            setCollectiveKeywordList(updatedCollectiveKeywordList);
+        }
       }, [keywords]);
 
       useEffect(() => {
@@ -120,6 +148,7 @@ function HomeKeywordOptions(props){
 
 
     return(
+        <>
         <Container className="main-keyword-container">
             <Form onSubmit={updateQuery} className='main-options-form'>
                 <Form.Group className="mb-3">
@@ -136,7 +165,11 @@ function HomeKeywordOptions(props){
                     </InputGroup>
                 </Form.Group>
                 <Form.Group className="mb-3 keyword-home-form">
-                    <Form.Label className='align-left'><b>Keywords</b></Form.Label>
+                    <div className="d-flex align-items-center check">
+                        <Form.Label className='align-left'><b>Keywords</b></Form.Label>
+                        {/* Add your button here */}
+                        <Button id="add-button-home" onClick={openModal}>+</Button>
+                    </div>
                     {(collectiveKeywordList !== undefined && collectiveKeywordList.length !== 0) ? (
                         <ToggleButtonGroup name="ml-api" className="keyword-parent-homepage">
                             {collectiveKeywordList.map((item, index) => (
@@ -153,23 +186,39 @@ function HomeKeywordOptions(props){
                 <Container className='semantic-layer-parent'>
                     <h2 style={{fontWeight: "normal", animationDelay: "1s"}} className='animate__animated animate__fadeIn'>We enriched your query with our semantic layer</h2>
                     <h3 style={{fontWeight: "lighter", animationDelay: "1.5s"}} className='animate__animated animate__fadeInUp'>Select more terms to expand your search</h3>
-                    {/* {(collectiveKeywordList !== undefined && collectiveKeywordList.length !== 0) ? (
-                    <Form.Group className="mb-3">
-                        <ToggleButtonGroup name="ml-api">
-                            <div className="keyword-parent-homepage">
-                            {collectiveKeywordList.map((item) => (
-                                <ToggleButton onClick={() => handleOptionClick(item)} className={`btn ${buttonStates[item] ? 'keyword-homepage-selected' : 'keyword-homepage-disabled'}`}>{item}</ToggleButton>
-                            ))}
-                            </div>
-                        </ToggleButtonGroup>
-                    </Form.Group>
-                    ) : (
-                    <div>No keywords detected. Please enhance your query and try again.</div>
-                    )} */}
                 </Container>
                 <Button style={{marginTop: '2%', animationDelay: "2s"}} className="animate__animated animate__fadeIn" onClick={performLegitSearch}>Search</Button>
             </Form>
         </Container>
+        <Modal animation={true} size="lg" show={showModal} onHide={closeModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add keyword</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>New keyword</Form.Label>
+                            <Form.Control
+                                type="keyword"
+                                placeholder="Camels"
+                                autoFocus
+                                value={newKeyword}
+                                onChange={(e) => setNewKeyword(e.target.value)}
+                                onKeyPress={handleKeyPress}
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={closeModal}>
+                        Close
+                    </Button>
+                    <Button className="branded-orange" onClick={saveChanges}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     );
 }
 
