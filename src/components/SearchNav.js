@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Navbar, Container, Nav, Form, Button, FormControl } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -48,16 +48,16 @@ function SearchNav(props) {
   };
 
   return (
-    <Navbar bg="light" expand="lg" sticky='top'>
+    <Navbar expand="lg" sticky='top' id="main-nav">
       <Container className='nav-content'>
         <Row id='search-nav-text'>
           <Col style={{marginTop: "1.2%"}}>
-          <Navbar.Brand href="/search">GBADs TAIL</Navbar.Brand>
+          <Navbar.Brand href="/search" id='brand-title'>GBAD<span style={{color: '#FF8029'}}>s</span> TAIL</Navbar.Brand>
           </Col>
           <Col>
           <Nav className="me-auto fix-search-nav">
-            <Nav.Link href="/search/faq">FAQ</Nav.Link>
             <Nav.Link href="https://animalhealthmetrics.org/">GBADs</Nav.Link>
+            <Nav.Link href="/search/faq">Support</Nav.Link>
             <Nav.Link href="https://www.gbadske.org/">Informatics</Nav.Link>
           </Nav>
           </Col>
@@ -65,7 +65,7 @@ function SearchNav(props) {
         <Row>
         <Form onSubmit={handleSearch} className="d-flex align-items-start">
             <div className="input-group">
-              <Button type="submit" variant="outline-secondary rounded" onClick={handleSearch}>Search</Button>
+              <Button type="submit" id='search-b' variant="outline-secondary rounded" onClick={handleSearch}>Search</Button>
               <FormControl id="main-search-text" type="text" name="search" placeholder="Search" className="mr-sm-2 rounded mainpage-search" value={searchText} onChange={handleSearchChange} />
             </div>
           </Form>

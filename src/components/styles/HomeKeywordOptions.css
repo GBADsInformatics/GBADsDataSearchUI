@@ -16,7 +16,7 @@
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
-    align-items: center;   
+    align-items: center;
 }
 
 #query-bar{
@@ -44,10 +44,9 @@
 }
 
 .keyword-homepage-selected{
-    background-color: #F7931D !important;
-    border: #F7931D !important;
+    background-color: #FF8029 !important;
+    border: #FF8029 !important;
     color: white;
-    border-radius: 5% !important;
     /* text-align: center; */
 }
 
@@ -57,8 +56,9 @@
     border-radius: 5% !important;
 }
 
-.align-left{
-    margin-right: 85%;
+.center-title{
+    text-align: center;
+    /* margin-left: 25%; */
 }
 
 /* CSS */
@@ -93,7 +93,8 @@
     .keyword-wrapper {
         flex: 0 0 calc(50% - 10px); /* Adjust the width for desktop view with some spacing */
         margin: 5px 0; /* Add spacing only on the top and bottom */
-        text-align: center; /* Center text horizontally within the cell */
+        text-align: center;
+        border-radius: 15% !important; /* Center text horizontally within the cell */
     }
 
     .keyword-homepage-selected,
@@ -104,12 +105,30 @@
 
 
 #add-button-home{
-    background-color: #F7931D;
-    border: #F7931D;
+    border: 0.5px solid #7A7A7A;
+    background: #FFF;
+    color: #7A7A7A;
+    text-align: center;
+    width: 100%;
 }
 
 #add-button-home:hover{
-    background-color: #f3ac5b;
+    color: white;
+    background-color: #828181;
+}
+
+.shadow-box{
+    width: 110%;
+    height: 100%;
+    padding: 3%;
+    border-radius: 3px;
+    border: 1px solid #E5E5E5;
+    background: #FFF;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.20);
+}
+
+.semantic-layer-parent{
+    margin-top: 3% !important;
 }
 
 /* .check{

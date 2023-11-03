@@ -6,6 +6,8 @@
 
 #search-g-data{
     margin-top: 2%;
+    background-color: #FF8029;
+    border: 1px solid #FF8029;
 }
 
 #search-icon{
@@ -28,4 +30,8 @@
 
 .main-search-container{
     width: 50% !important;
+}
+
+#appleType-link{
+    text-decoration: none;
 }

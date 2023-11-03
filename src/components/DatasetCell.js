@@ -1,26 +1,24 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+// import { Container } from "react-bootstrap";
 import "./styles/DatasetCell.css";
 
 function DatasetCell(props){
     return(
         <div className="datacell-parent">
             <div className="center-point">
-                <p className="dataset-header">Title: </p>
-                <p>{props.title}</p>
+                <p><b>{props.title}</b></p>
             </div>
-            <div className="center-point">
-                <p className="dataset-header">Authors: </p>
-                <p>{props.authors}</p>
+
+            <div className="organize-year-author">
+                <div>
+                    {props.startYear}-{props.endYear}
+                </div>
+                <span style={{marginRight: '5px', marginLeft: '5px'}}> | </span>
+                <div>
+                    {props.authors}
+                </div>
             </div>
-            <div className="center-point">
-                <p className="dataset-header">Source: </p>
-                <p>{props.source}</p>
-            </div>
-            <div className="center-point">
-                <p className="dataset-header">Year(s): </p>
-                <p>{props.startYear} - {props.endYear}</p>
-            </div>
+            {props.source}
         </div>
     );
 }

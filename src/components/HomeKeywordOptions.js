@@ -150,8 +150,10 @@ function HomeKeywordOptions(props){
         <>
         <Container className="main-keyword-container">
             <Form onSubmit={updateQuery} className='main-options-form'>
-                <Form.Group className="mb-3">
+
+                <Form.Group className="mb-3 shadow-box">
                     <Form.Label><b>Your Query</b></Form.Label>
+                    <hr/>
                     <InputGroup>
                         <Form.Control
                         type="text"
@@ -163,12 +165,10 @@ function HomeKeywordOptions(props){
                         <Button variant="outline-secondary rounded-start" style={{borderRadius: '5%'}} onClick={updateQuery} id="update-query-b">Update Query</Button>
                     </InputGroup>
                 </Form.Group>
-                <Form.Group className="mb-3 keyword-home-form">
-                    <div className="d-flex align-items-center check">
-                        <Form.Label className='align-left'><b>Keywords</b></Form.Label>
-                        {/* Add your button here */}
-                        <Button id="add-button-home" onClick={openModal}>+</Button>
-                    </div>
+
+                <Form.Group className="mb-3 keyword-home-form shadow-box">
+                    <Form.Label className='center-title'><b>Keywords</b></Form.Label>
+                    <hr/>
                     {(collectiveKeywordList !== undefined && collectiveKeywordList.length !== 0) ? (
                         <ToggleButtonGroup name="ml-api" className="keyword-parent-homepage">
                             {collectiveKeywordList.map((item, index) => (
@@ -176,17 +176,19 @@ function HomeKeywordOptions(props){
                                     <ToggleButton onClick={() => handleOptionClick(item)} className={`btn ${buttonStates[item] ? 'keyword-homepage-selected' : 'keyword-homepage-disabled'}`}>{item}</ToggleButton>
                                 </div>
                             ))}
+                            <div className='keyword-wrapper'>
+                                <Button id="add-button-home" onClick={openModal}>Add a keyword</Button>
+                            </div>
                         </ToggleButtonGroup>
                     ) : (
                         <div>No keywords detected. Please enhance your query and try again.</div>
                     )}
-                </Form.Group>
-
                 <Container className='semantic-layer-parent'>
-                    <h2 style={{fontWeight: "normal", animationDelay: "1s"}} className='animate__animated animate__fadeIn'>We enriched your query with our semantic layer</h2>
-                    <h3 style={{fontWeight: "lighter", animationDelay: "1.5s"}} className='animate__animated animate__fadeInUp'>Select more terms to expand your search</h3>
+                    <h3 style={{fontWeight: "normal",animationDelay: "1s"}} className='animate__animated animate__fadeIn'>We enriched your query with our semantic layer</h3>
+                    <h4 style={{fontWeight: "lighter", animationDelay: "1.5s"}} className='animate__animated animate__fadeInUp'>Select more terms to expand your search</h4>
                 </Container>
                 <Button style={{marginTop: '2%', animationDelay: "2s"}} className="animate__animated animate__fadeIn" onClick={performLegitSearch}>Search</Button>
+                </Form.Group>
             </Form>
         </Container>
         <Modal animation={true} size="lg" show={showModal} onHide={closeModal}>

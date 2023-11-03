@@ -3,7 +3,6 @@ import Container from 'react-bootstrap/Container';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { createSearchParams, useNavigate } from 'react-router-dom';
 import "./styles/MainpageSearchBar.css";
 
 const SearchBar = (props) => {
@@ -34,9 +33,9 @@ const SearchBar = (props) => {
             </div>
         </div>
         <Button variant="secondary" id="search-g-data" onClick={handleSearch}>Search GBADs Data</Button>
-        <Container id="mainpage-link">
-            <a href="https://gbadske.org" target="_blank" rel="noreferrer" >Data, metadata, models, and more!</a>
-        </Container>
+        {/* <Container id="mainpage-link">
+            <a href="https://gbadske.org" target="_blank" rel="noreferrer" id='appleType-link'>Data, metadata, models, and more!</a>
+        </Container> */}
         </Form>
     </Container>
   );

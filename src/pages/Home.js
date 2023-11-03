@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from "../components/MainpageSearchBar";
 import MainpageNav from "../components/MainpageNav";
 import Image from 'react-bootstrap/Image';
@@ -12,7 +12,6 @@ function Home() {
   const [searchText, setSearchWas] = useState('');
   const [keywords, setKeywords] = useState([]);
   const [showAnimation, setShowAnimation] = useState(false);
-  const hiddenContentRef = useRef(null);
 
   const receiveSearchFromChild = (theSearchQuery) => {
     // Update the keywords in the parent component's state
@@ -55,7 +54,7 @@ function Home() {
           <h2>Trusted Animal Information Portal</h2>
           <SearchBar recSearch={receiveSearchFromChild}></SearchBar>
         </Container>
-        {(searchText!=='' && keywords.length!=0) &&(
+        {(searchText!=='' && keywords.length!==0) &&(
           <Container
             className={`hidden-keyword-options ${showAnimation ? 'slide-up' : ''}`}
           >

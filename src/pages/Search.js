@@ -158,7 +158,7 @@ function Search() {
       />
       <Container id="organize-main-search">
         <Container className='keyword-sidebar-main-parent'>
-        {keywords.length!=undefined ? (
+        {keywords.length!==undefined ? (
             // Render the child component with the fetched data
             <KeywordSidebar setNewKeywords={resetKeywords} keywords={keywords} />
         ) : (

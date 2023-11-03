@@ -1,0 +1,12 @@
+#main-nav{
+    background-color: #333333;
+}
+
+#brand-title{
+    font-weight: 500;
+    color: white;
+}
+
+.nav-link{
+    color: white !important;
+}

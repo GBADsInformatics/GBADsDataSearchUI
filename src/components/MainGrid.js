@@ -10,18 +10,13 @@ import DatasetCell from './DatasetCell';
 
 import LoadingTable from './LoadingTable';
 
-import { createSearchParams, useNavigate } from 'react-router-dom';
-
 
 function MainGrid(props) {
     const [selectedOption, setSelectedOption] = useState('data');
     // Used to choose which option to see (Data, Literature, Query)
-    const [checked, setChecked] = useState(false);
 
     const [isLoading, setLoading] = useState(true);
     const [reqData, setRequestedData] = useState();
-
-    const navigate = useNavigate();
     
     // Used to show which row was selected
     const [selectedRowIndex, setSelectedRowIndex] = useState(null);

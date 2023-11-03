@@ -15,7 +15,6 @@ import {
     faPerson,
     faCertificate
 } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 
 import { Button, ButtonGroup, Container } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
@@ -35,7 +34,7 @@ function ShortenDesc(text){
 
 function CellData(props){
     var descText = '';
-    if (props.desc != undefined){
+    if (props.desc !== undefined){
         descText = ShortenDesc(props.desc);
     }
 

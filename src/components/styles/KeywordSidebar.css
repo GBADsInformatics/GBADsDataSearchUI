@@ -1,5 +1,7 @@
 .keyword-sidebar-parent{
-    border: 1px solid #dee2e6;
+    border: 1px solid #E5E5E5;
+    background: #FFF;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.20);
     padding: 10%;
 }
 
@@ -10,7 +12,7 @@
 }
 
 .keyword{
-    background-color: #F7931D;
+    background-color: #FF8029;
     border-radius: 5%;
     color: white;
     /* text-align: center; */
@@ -37,15 +39,15 @@
 }
 
 #add-button{
-    background-color: #F7931D;
-    border: #F7931D;
+    background-color: #FF8029;
+    border: #FF8029;
 }
 
 #add-button:hover{
-    background-color: #f3ac5b;
+    background-color: #faa369;
 }
 
 .branded-orange{
-    background-color: #F7931D !important;
-    border: #F7931D !important;
+    background-color: #FF8029 !important;
+    border: #FF8029 !important;
 }

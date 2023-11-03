@@ -1,5 +1,7 @@
 .main-table{
-    border: 1px solid #dee2e6;
+  border: 1px solid #E5E5E5;
+  background: #FFF;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.20);  
 }
 
 .inner-table{
@@ -12,18 +14,18 @@ tr:hover td{
 }
 
 .main-option-button {
-    background-color: rgba(244, 146, 46, 0.42) !important;
+    background: rgba(247, 147, 29, 0.42) !important;
     color: white;
     border: 0.0px solid black !important;
   }
 
   .main-option-button-selected {
-    background-color: #F7931D !important;
+    background-color: #FF8029 !important;
     color: white;
     border: 0.0px solid black !important;
   }
 
 .main-option-button:hover {
-    background-color: #F7931D !important;
+    background-color: #faa369 !important;
     color: white;
   }
