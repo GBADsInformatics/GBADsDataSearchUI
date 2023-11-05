@@ -51,7 +51,7 @@ function Home() {
       <Container id="mainpage-main-content">
         <Container>
           <Image id="main-logo" src={process.env.PUBLIC_URL + '/imgs/GBADsLogoRedesign.webp'} alt="GBADs logo" fluid />
-          <h2>Trusted Animal Information Portal</h2>
+          <h2>Trusted Animal Information portaL</h2>
           <SearchBar recSearch={receiveSearchFromChild}></SearchBar>
         </Container>
         {(searchText!=='' && keywords.length!==0) &&(
