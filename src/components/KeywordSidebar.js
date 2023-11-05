@@ -62,9 +62,20 @@ function KeywordSidebar(props) {
 
     const handleKeywordClick = (index) => {
         // Remove the clicked keyword from the list
-        const updatedKeywords = [...keywords];
-        updatedKeywords.splice(index, 1);
-        setKeywords(updatedKeywords);
+        const removedValue = collectiveKeywordList.splice(index, 1)[0];
+        const copyKeywords = keywords;
+        for (const key in copyKeywords) {
+            if (copyKeywords.hasOwnProperty(key) && Array.isArray(copyKeywords[key])) {
+              const list = copyKeywords[key];
+              console.log(`List for ${key}:`);
+              const updatedList = list.filter(item => item !== removedValue);
+              copyKeywords[key] = updatedList;
+            }
+          }
+        setKeywords(copyKeywords);
+        const updatedCollectiveKeywordList = [...copyKeywords.countries, ...copyKeywords.species, ...copyKeywords.years];
+        setCollectiveKeywordList(updatedCollectiveKeywordList);
+        props.setNewKeywords(copyKeywords);
     };
 
     useEffect(() => {
@@ -93,11 +104,9 @@ function KeywordSidebar(props) {
                         key={index}
                         className="keyword"
                         onClick={() => handleKeywordClick(index)}
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
                     >
-                        <p className="keyword-inner-text">{hoveredIndex === index ? "Click to remove" : item}</p>
-                        <i class="ico-times" role="img" aria-label="Cancel"></i>
+                        <p className="keyword-inner-text">{item}</p>
+                        <i className="ico-times" role="img" aria-label="Cancel"></i>
                     </div>
                     ))
                     : <p>No keywords available. Add keywords or enhance the query for better results!</p>

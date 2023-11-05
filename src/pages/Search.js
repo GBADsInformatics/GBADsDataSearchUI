@@ -48,9 +48,8 @@ function Search() {
   const createParams = (aQuery) => {
     const queryParams = {
       criteria: aQuery,
-      keywordList: keywords
+      keywordList: JSON.stringify(keywords)
     };
-    queryParams.keywordList = queryParams.keywordList.join(',');
     return queryParams;
   }
 
