@@ -24,18 +24,13 @@ function MainGrid(props) {
 
       const handleRowClick = (rowIndex) => {
         if (!modalOpen) {
-            console.log(selectedRowIndex);
             setSelectedRowIndex(rowIndex);
-            console.log("OPEN");
-            console.log(selectedRowIndex);
             setModalOpen(true);
         }
       };
 
     const handleCloseModal = () => {
-        console.log('Close Modal Clicked -> HERE'); // Add this line for debugging
         setSelectedRowIndex(null); // Reset the selectedRowIndex to close the modal
-        console.log(selectedRowIndex);
         setModalOpen(false);
     };
 
@@ -54,7 +49,6 @@ function MainGrid(props) {
                 // Set the merged data in the state
                 setRequestedData(mergedData);
                 setLoading(false);
-                console.log(mergedData);
               });
           } catch (exception) {
             console.error(exception);
@@ -84,17 +78,11 @@ function MainGrid(props) {
           // Set the merged data in the state
           setRequestedData(mergedData);
           setLoading(false);
-          console.log(mergedData);
         });
     } catch (exception) {
       console.error(exception);
     }
   }, []);
-
-  useEffect(() => {
-    // Add a console log to help with debugging
-    console.log('SelectedRowIndex:', selectedRowIndex);
-}, [selectedRowIndex]);
 
     if (isLoading) {
         

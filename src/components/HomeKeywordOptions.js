@@ -9,16 +9,16 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
-
 function HomeKeywordOptions(props){
     const [query, setQuery] = useState(props.query);
     const [keywords, setKeywords] = useState(props.keywords);
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [newKeyword, setNewKeyword] = useState("");
-
-    // Just a list of all the keywords rather than an object
+    const [selectedOption, setSelectedOption] = useState("NA");
     const [collectiveKeywordList, setCollectiveKeywordList] = useState([]);
+
+
     // const collectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
 
     const openModal = () => {
@@ -26,24 +26,47 @@ function HomeKeywordOptions(props){
         setShowModal(true);
     };
 
-    const closeModal = () => setShowModal(false);
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedOption("NA");
+    }
 
     const handleInputChange = (e) => {
         setQuery(e.target.value);
     };
 
-    const saveChanges = () => {
-        console.log("SAVE CHANGES");
-        console.log(collectiveKeywordList);
-        if (newKeyword) {
-            // Update the list of keywords with the new one
-            setCollectiveKeywordList([...collectiveKeywordList, newKeyword]);
+    const addToJsonKeywords = () =>{
+        if (selectedOption==="species"){
+            const updatedKeywords = { ...keywords };
+            updatedKeywords.species.push(newKeyword);
+            setKeywords(updatedKeywords);
         }
-        closeModal();
-        console.log("Child:");
-        console.log(newKeyword);
-        console.log(collectiveKeywordList);
-    };
+        if (selectedOption==="country"){
+            const updatedKeywords = { ...keywords };
+            updatedKeywords.countries.push(newKeyword);
+            setKeywords(updatedKeywords);
+        }
+        if (selectedOption==="year"){
+            const updatedKeywords = { ...keywords };
+            updatedKeywords.years.push(newKeyword);
+            setKeywords(updatedKeywords);
+        }
+    }
+
+    const saveChanges = () => {
+        if (selectedOption === "NA") {
+            alert("Please select a valid option."); // Set showAlert to true to trigger the alert
+        }
+        else{
+            if (newKeyword) {
+            // Update the list of keywords with the new one
+                setCollectiveKeywordList([...collectiveKeywordList, newKeyword]);
+                addToJsonKeywords();
+            }
+            closeModal();
+        }
+      };
+      
 
     const handleKeyPress = (e) => {
         if (e.key === "Enter" && showModal===true) {
@@ -79,16 +102,6 @@ function HomeKeywordOptions(props){
         resetButtonStates();
     }
 
-    // useEffect(() => {
-    //     // Fetch keywords from the API once the component has loaded
-    //     keywords = props.keywords;
-    //   }, []);
-
-    // const initialState = collectiveKeywordList.reduce((acc, option) => {
-    //     acc[option] = true;
-    //     return acc;
-    //   }, {});
-
     
     const [buttonStates, setButtonStates] = useState({});
     // const [buttonStates, setButtonStates] = useState(initialState);
@@ -110,24 +123,41 @@ function HomeKeywordOptions(props){
         }));
       };  
       
-    const performLegitSearch= (e) => {
+      const performLegitSearch = (e) => {
         e.preventDefault();
-        var sendKeywords = [];
+      
+        const categorizedKeywords = {
+          species: [],
+          countries: [],
+          years: [],
+        };
+      
         for (const [key, value] of Object.entries(buttonStates)) {
-            if (value === true){
-                sendKeywords.push(key);
+          if (value === true) {
+            // Categorize the keywords based on the keyword type
+            if (keywords.species.includes(key)) {
+              categorizedKeywords.species.push(key);
+            } else if (keywords.countries.includes(key)) {
+              categorizedKeywords.countries.push(key);
+            } else if (keywords.years.includes(key)) {
+              categorizedKeywords.years.push(key);
             }
+          }
         }
+      
         const queryParams = {
-            criteria: query,
-            keywordList: sendKeywords
-          };
-          queryParams.keywordList = queryParams.keywordList.join(',');
+          criteria: query,
+          keywordList: JSON.stringify(categorizedKeywords),
+        };
+      
+        // Serialize the queryParams object to a string for the URL
+        const queryString = createSearchParams(queryParams).toString();
+      
         navigate({
-            pathname: '/search/query/data',
-            search: createSearchParams(queryParams).toString()
-            })
-    }
+          pathname: '/search/query/data',
+          search: queryString,
+        });
+      };      
 
     useEffect(() => {
         if (keywords.countries !== undefined){
@@ -144,7 +174,6 @@ function HomeKeywordOptions(props){
       
         setButtonStates(initialState);
       }, [collectiveKeywordList]);
-
 
     return(
         <>
@@ -173,7 +202,14 @@ function HomeKeywordOptions(props){
                         <ToggleButtonGroup name="ml-api" className="keyword-parent-homepage">
                             {collectiveKeywordList.map((item, index) => (
                                 <div key={index} className="keyword-wrapper">
-                                    <ToggleButton onClick={() => handleOptionClick(item)} className={`btn ${buttonStates[item] ? 'keyword-homepage-selected' : 'keyword-homepage-disabled'}`}>{item}</ToggleButton>
+                                    <ToggleButton onClick={() => handleOptionClick(item)} className={`btn ${buttonStates[item] ? 'keyword-homepage-selected' : 'keyword-homepage-disabled'}`}>
+                                        {item}
+                                        {(buttonStates[item]) ? (
+                                        <i class="ico-times home-icon" role="img" aria-label="Cancel"></i>
+                                    ) : (
+                                        <i class="ico-check home-icon" role="img" aria-label="Accept"></i>
+                                    )}
+                                    </ToggleButton>
                                 </div>
                             ))}
                             <div className='keyword-wrapper'>
@@ -198,7 +234,7 @@ function HomeKeywordOptions(props){
                 <Modal.Body>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>New keyword</Form.Label>
+                            <Form.Label style={{fontWeight: 'bold'}}>New keyword</Form.Label>
                             <Form.Control
                                 type="keyword"
                                 placeholder="Camels"
@@ -207,6 +243,19 @@ function HomeKeywordOptions(props){
                                 onChange={(e) => setNewKeyword(e.target.value)}
                                 onKeyPress={handleKeyPress}
                             />
+                            <br />
+                            <Form.Select
+                                aria-label="Default select example"
+                                value={selectedOption}
+                                onChange={(e) => {
+                                    setSelectedOption(e.target.value);
+                                }}
+                                >
+                                <option value="NA">Select an option</option>
+                                <option value="species">Species</option>
+                                <option value="country">Country</option>
+                                <option value="year">Year</option>
+                            </Form.Select>
                         </Form.Group>
                     </Form>
                 </Modal.Body>

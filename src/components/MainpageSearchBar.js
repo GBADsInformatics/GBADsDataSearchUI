@@ -16,7 +16,6 @@ const SearchBar = (props) => {
     e.preventDefault();
     // Implement your search functionality here
     // You can access the search query using e.target.elements.search.value
-    console.log('Search query:', searchText);
     props.recSearch(searchText);
   };
 

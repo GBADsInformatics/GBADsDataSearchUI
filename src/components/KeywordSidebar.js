@@ -7,25 +7,50 @@ import Form from 'react-bootstrap/Form';
 function KeywordSidebar(props) {
     const [showModal, setShowModal] = useState(false);
     const [newKeyword, setNewKeyword] = useState("");
-    const [keywords, setKeywords] = useState(props.keywords || []);
+    const [keywords, setKeywords] = useState(props.keywords);
     const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [selectedOption, setSelectedOption] = useState("NA");
+    const [collectiveKeywordList, setCollectiveKeywordList] = useState([]);
 
     const openModal = () => {
         setNewKeyword(""); // Clear the input field when opening the modal
         setShowModal(true);
     };
 
-    const closeModal = () => setShowModal(false);
+    const addToJsonKeywords = () =>{
+        if (selectedOption==="species"){
+            const updatedKeywords = { ...keywords };
+            updatedKeywords.species.push(newKeyword);
+            setKeywords(updatedKeywords);
+        }
+        if (selectedOption==="country"){
+            const updatedKeywords = { ...keywords };
+            updatedKeywords.countries.push(newKeyword);
+            setKeywords(updatedKeywords);
+        }
+        if (selectedOption==="year"){
+            const updatedKeywords = { ...keywords };
+            updatedKeywords.years.push(newKeyword);
+            setKeywords(updatedKeywords);
+        }
+    }
+
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedOption("NA");
+    }
 
     const saveChanges = () => {
-        if (newKeyword) {
-            // Update the list of keywords with the new one
-            setKeywords([...keywords, newKeyword]);
+        if (selectedOption === "NA") {
+            alert("Please select a valid option."); // Set showAlert to true to trigger the alert
         }
-        closeModal();
-        console.log("Child:");
-        console.log(newKeyword);
-        console.log(keywords);
+        else{
+            if (newKeyword) {
+                // Update the list of keywords with the new one
+                addToJsonKeywords();
+            }
+            closeModal();
+        }
     };
 
     const handleKeyPress = (e) => {
@@ -43,8 +68,11 @@ function KeywordSidebar(props) {
     };
 
     useEffect(() => {
-        console.log("USEEFFECT: ");
         props.setNewKeywords(keywords);
+        if (keywords.countries !== undefined){
+            const updatedCollectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
+            setCollectiveKeywordList(updatedCollectiveKeywordList);
+        }
   }, [keywords]);
 
   useEffect(() => {
@@ -59,8 +87,8 @@ function KeywordSidebar(props) {
                     <Button id="add-button" onClick={openModal}>+</Button>
                 </div>
                 <div className="keyword-parent">
-                    {keywords!==undefined && keywords.length > 0 && keywords[0] !== ""
-                        ? keywords.map((item, index) => (
+                    {collectiveKeywordList!==undefined && collectiveKeywordList.length > 0 && collectiveKeywordList[0] !== ""
+                        ? collectiveKeywordList.map((item, index) => (
                         <div
                         key={index}
                         className="keyword"
@@ -68,7 +96,8 @@ function KeywordSidebar(props) {
                         onMouseEnter={() => setHoveredIndex(index)}
                         onMouseLeave={() => setHoveredIndex(null)}
                     >
-                        <p>{hoveredIndex === index ? "Click to remove" : item}</p>
+                        <p className="keyword-inner-text">{hoveredIndex === index ? "Click to remove" : item}</p>
+                        <i class="ico-times" role="img" aria-label="Cancel"></i>
                     </div>
                     ))
                     : <p>No keywords available. Add keywords or enhance the query for better results!</p>
@@ -82,7 +111,7 @@ function KeywordSidebar(props) {
                 <Modal.Body>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>New keyword</Form.Label>
+                            <Form.Label style={{fontWeight: 'bold'}}>New keyword</Form.Label>
                             <Form.Control
                                 type="keyword"
                                 placeholder="Camels"
@@ -92,6 +121,19 @@ function KeywordSidebar(props) {
                                 onKeyPress={handleKeyPress}
                             />
                         </Form.Group>
+                        <br />
+                            <Form.Select
+                                aria-label="Default select example"
+                                value={selectedOption}
+                                onChange={(e) => {
+                                    setSelectedOption(e.target.value);
+                                }}
+                                >
+                                <option value="NA">Select an option</option>
+                                <option value="species">Species</option>
+                                <option value="country">Country</option>
+                                <option value="year">Year</option>
+                            </Form.Select>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

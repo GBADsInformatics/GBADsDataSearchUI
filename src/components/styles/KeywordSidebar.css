@@ -8,7 +8,6 @@
 .keyword-parent{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .keyword{
@@ -21,14 +20,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+
+.keyword-inner-text{
+    text-align: center;
+    /* KEYWORD TEXT HEIGHT */
+    margin-top: 9%;
+    margin-left: 5%;
 }
 
 .keyword:hover{
     background-color: grey;
-}
-
-.keyword *{
-    text-align: center;
 }
 
 .title-and-add-button{
@@ -51,3 +58,18 @@
     background-color: #FF8029 !important;
     border: #FF8029 !important;
 }
+
+[class^="ico-"], [class*=" ico-"] {
+    font: normal 1em/1 Arial, sans-serif;
+    display: inline-block;
+    margin: 5%;
+  }
+  
+  .ico-times::before { content: "\2716"; }
+
+  @media (max-width: 768px) {
+    .keyword-inner-text{
+        text-align: center;
+        margin-top: 5%;
+    }
+  }

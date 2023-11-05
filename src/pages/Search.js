@@ -43,7 +43,7 @@ function Search() {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const [searchWas, setSearchWas] = useState(searchParams.get('criteria'));
-    const [keywords, setKeywords] = useState(searchParams.get('keywordList') ? searchParams.get('keywordList').split(',') : []);
+    const [keywords, setKeywords] = useState(JSON.parse(searchParams.get('keywordList')));
 
   const createParams = (aQuery) => {
     const queryParams = {
@@ -56,15 +56,19 @@ function Search() {
 
   const resetKeywords = (keywordsFromChild) =>{
     setKeywords(keywordsFromChild);
+  
     const queryParams = {
       criteria: searchWas,
-      keywordList: keywordsFromChild
+      keywordList: JSON.stringify(keywords),
     };
-    queryParams.keywordList = queryParams.keywordList.join(',');
+  
+    // Serialize the queryParams object to a string for the URL
+    const queryString = createSearchParams(queryParams).toString();
+  
     navigate({
       pathname: '/search/query' + IdentifyURL(),
-      search: createSearchParams(queryParams).toString()
-    })
+      search: createSearchParams(queryParams).toString(),
+    });
   }
 
   // Function to receive keywords from SearchNav component
@@ -74,9 +78,6 @@ function Search() {
     fetchKeywordsFromApi(theSearchQuery);
     
     const queryParams = createParams(theSearchQuery);
-    console.log("FOLLOWING:")
-    console.log(theSearchQuery)
-    console.log(keywords);
 
     navigate({
       pathname: path,
@@ -86,9 +87,6 @@ function Search() {
 
   // Function to receive keywords from SearchNav component
   const optionChange = (path) => {
-    console.log("New Options");
-    console.log(keywords);
-    console.log(path);
 
     const queryParams = createParams(searchWas);
     navigate({
@@ -111,8 +109,6 @@ function Search() {
   // Function to fetch keywords from an API
   const fetchKeywordsFromApi = async (theSearchQuery) => {
     try {
-      console.log("MAKING THE FOLLOWING CALL TO API WITH:")
-      console.log(theSearchQuery);
       // Replace this with your actual API call to fetch keywords
       const baseUrl = "https://www.gbadske.org/search/api/search";
       // Encode the sentence to ensure it's safe for use in a URL
@@ -124,7 +120,6 @@ function Search() {
       const response = await axios.get(urlWithQuery);
 
       const data = response.data;
-      console.log(data);
       const refinedResults = refineApiResults(data);
       setKeywords(refinedResults);
       // Call sendDataToParent to send keywords back to the parent
@@ -144,10 +139,10 @@ function Search() {
   //     });
   // }, []);
 
-  useEffect(() => {
-    console.log("KEYWORDS RESET");
-    console.log(keywords);
-}, [keywords]);
+//   useEffect(() => {
+//     console.log("KEYWORDS RESET");
+//     console.log(keywords);
+// }, [keywords]);
 
 
   return (
@@ -158,7 +153,7 @@ function Search() {
       />
       <Container id="organize-main-search">
         <Container className='keyword-sidebar-main-parent'>
-        {keywords.length!==undefined ? (
+        {keywords!==undefined ? (
             // Render the child component with the fetched data
             <KeywordSidebar setNewKeywords={resetKeywords} keywords={keywords} />
         ) : (

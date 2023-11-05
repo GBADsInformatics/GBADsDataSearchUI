@@ -134,3 +134,15 @@
 /* .check{
     border: 1px solid red;
 } */
+
+[class^="ico-"], [class*=" ico-"] {
+    font: normal 1em/1 Arial, sans-serif;
+    display: inline-block;
+  }
+
+.home-icon{
+    margin-right: -5% !important;
+}
+  
+  .ico-times::before { content: "\2716"; }
+  .ico-check::before { content: "\2714"; }
