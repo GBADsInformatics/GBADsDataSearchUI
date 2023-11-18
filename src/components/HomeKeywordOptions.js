@@ -221,7 +221,7 @@ function HomeKeywordOptions(props){
                     )}
                 <Container className='semantic-layer-parent'>
                     <h3 style={{fontWeight: "normal",animationDelay: "1s"}} className='animate__animated animate__fadeIn'>We enriched your query with our semantic layer</h3>
-                    <h4 style={{fontWeight: "lighter", animationDelay: "1.5s"}} className='animate__animated animate__fadeInUp'>Select more terms to expand your search</h4>
+                    <h4 style={{fontWeight: "lighter", animationDelay: "1.5s"}} className='animate__animated animate__fadeInUp'>You can select more terms to help expand your search</h4>
                 </Container>
                 <Button style={{marginTop: '2%', animationDelay: "2s"}} className="animate__animated animate__fadeIn" onClick={performLegitSearch}>Search</Button>
                 </Form.Group>

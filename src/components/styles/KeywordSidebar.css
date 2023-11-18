@@ -21,7 +21,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    cursor: pointer;
+    /* cursor: pointer; */
     display: flex;
     flex-direction: row;
     justify-content:space-between;
@@ -34,9 +34,10 @@
     margin-left: 5%;
 }
 
-.keyword:hover{
+/* UNCOMMENTT IN VERSION 1.1 */
+/* .keyword:hover{
     background-color: grey;
-}
+} */
 
 .title-and-add-button{
     display: flex;
@@ -73,3 +74,10 @@
         margin-top: 5%;
     }
   }
+
+/* REMOVE IN VERSION 1.1 */
+
+.keyword-sidebar-hide{
+    background-color: #FF8029;
+    color: #FF8029;
+}

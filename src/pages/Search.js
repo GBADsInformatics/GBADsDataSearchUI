@@ -66,7 +66,7 @@ function Search() {
   
     navigate({
       pathname: '/search/query' + IdentifyURL(),
-      search: createSearchParams(queryParams).toString(),
+      search: queryString,
     });
   }
 
@@ -82,6 +82,7 @@ function Search() {
       pathname: path,
       search: createSearchParams(queryParams).toString()
     });
+    
   };
 
   // Function to receive keywords from SearchNav component
@@ -94,16 +95,16 @@ function Search() {
     })
   };
 
-  const refineApiResults = (result) => {
-    var mergedList = [];
-    for (var key in result) {
-      if (Array.isArray(result[key])) {
-        // Check if the property is an array
-        mergedList = mergedList.concat(result[key]);
-      }
-    }
-    return mergedList;  
-  }
+  // const refineApiResults = (result) => {
+  //   var mergedList = [];
+  //   for (var key in result) {
+  //     if (Array.isArray(result[key])) {
+  //       // Check if the property is an array
+  //       mergedList = mergedList.concat(result[key]);
+  //     }
+  //   }
+  //   return mergedList;  
+  // }
 
   // Function to fetch keywords from an API
   const fetchKeywordsFromApi = async (theSearchQuery) => {
@@ -119,30 +120,19 @@ function Search() {
       const response = await axios.get(urlWithQuery);
 
       const data = response.data;
-      const refinedResults = refineApiResults(data);
-      setKeywords(refinedResults);
+      // const refinedResults = refineApiResults(data);
+      setKeywords(data);
       // Call sendDataToParent to send keywords back to the parent
     } catch (error) {
       console.error('Error fetching keywords:', error);
     }
   };
 
-  // useEffect(() => {
-  //   // Fetch keywords from the API once the component has loaded
-  //   fetchKeywordsFromApi(searchWas)
-  //     .then(() => {
-  //       console.log('Keywords fetched successfully:', keywords);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching keywords:', error);
-  //     });
-  // }, []);
-
-//   useEffect(() => {
-//     console.log("KEYWORDS RESET");
-//     console.log(keywords);
-// }, [keywords]);
-
+  useEffect(() => {
+    // Trigger the animation when searchText and keywords are not empty
+    console.log("HERE THEY ARE");
+    console.log(keywords)
+  }, [keywords]);
 
   return (
     <div>
@@ -156,7 +146,7 @@ function Search() {
             // Render the child component with the fetched data
             <KeywordSidebar setNewKeywords={resetKeywords} keywords={keywords} />
         ) : (
-            // Optionally, display a loading message or spinner while fetching data
+          // Show keywords loading
             <div className="keyword-sidebar-parent sidebar-loading">
                 <p><b><u>Keywords</u></b></p>
                 <Placeholder.Button variant="warning" xs={6} className="sidebar-loading-cell"/>
@@ -166,7 +156,7 @@ function Search() {
         )}
         </Container>
         <Container id="main-grid-container">
-          <MainGrid sendDataFromMaingrid={optionChange} theSearch={searchWas} />
+          <MainGrid sendDataFromMaingrid={optionChange} theSearch={searchWas} keywords={keywords}/>
         </Container>
       </Container>
     </div>

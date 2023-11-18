@@ -17,6 +17,8 @@ function MainGrid(props) {
 
     const [isLoading, setLoading] = useState(true);
     const [reqData, setRequestedData] = useState();
+
+    const [keywords, setKeywords] = useState(props.keywords);
     
     // Used to show which row was selected
     const [selectedRowIndex, setSelectedRowIndex] = useState(null);
@@ -36,20 +38,26 @@ function MainGrid(props) {
 
     const optionChangeApiCall = () => {
         // ONCE WE HAVE A WAY TO CHECK WHERE TO SEARCH FOR LITERATURE, QUERY, AND DATA WE CAN MODIFY THE CALL
+        const apiUrl = 'https://gbadske.org/meta-api/datasets';
         try {
-            axios.get("https://gbadske.org/meta-api/datasets?countries=Canada&species=Cattle")
+            const params = {
+                countries: keywords.countries.join(' '),
+                species:  keywords.species.join(' '),
+              };
+
+            console.log("INFO:");
+
+            console.log(params);
+
+            axios.get(apiUrl, { params })
               .then(response => {
                 const originalData = response.data;
-                // Duplicate the data
-                const duplicatedData = [...originalData, ...originalData];
-                
-                // Merge the duplicated data with the original data
-                const mergedData = [...originalData, ...duplicatedData];
-                
                 // Set the merged data in the state
-                setRequestedData(mergedData);
+                setRequestedData(originalData);
                 setLoading(false);
+                console.log(originalData);
               });
+            
           } catch (exception) {
             console.error(exception);
           }
@@ -65,24 +73,32 @@ function MainGrid(props) {
     
     // TO BE USED ONCE THE API IS COMPLETE
     useEffect(() => {
-    try {
-      axios.get("https://gbadske.org/meta-api/datasets?countries=Canada&species=Cattle")
-        .then(response => {
-          const originalData = response.data;
-          // Duplicate the data
-          const duplicatedData = [...originalData, ...originalData];
-          
-          // Merge the duplicated data with the original data
-          const mergedData = [...originalData, ...duplicatedData];
-          
-          // Set the merged data in the state
-          setRequestedData(mergedData);
-          setLoading(false);
-        });
-    } catch (exception) {
-      console.error(exception);
-    }
+        const apiUrl = 'https://gbadske.org/meta-api/datasets';
+        try {
+            const params = {
+                countries: keywords.countries.join(' '),
+                species:  keywords.species.join(' '),
+              };
+
+            axios.get(apiUrl, { params })
+              .then(response => {
+                const originalData = response.data;
+                // Set the merged data in the state
+                setRequestedData(originalData);
+                setLoading(false);
+              });
+          } catch (exception) {
+            console.error(exception);
+          }
   }, []);
+
+  useEffect(() => {
+    setKeywords(props.keywords);
+}, [props.keywords]);
+
+useEffect(() =>{
+    optionChangeApiCall();
+}, [keywords])
 
     if (isLoading) {
         

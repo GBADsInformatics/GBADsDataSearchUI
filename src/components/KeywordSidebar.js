@@ -88,14 +88,20 @@ function KeywordSidebar(props) {
 
   useEffect(() => {
     setKeywords(props.keywords);
+    // const updatedCollectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
+    setCollectiveKeywordList(props.keywords);
   }, [props.keywords])
+
+
+
 
     return (
         <>
             <div className="keyword-sidebar-parent">
                 <div className="title-and-add-button">
                     <p><b><u>Keywords</u></b></p>
-                    <Button id="add-button" onClick={openModal}>+</Button>
+                    {/* UNCOMMENT THE LINE BELOW FOR VERSION 1.1 */}
+                    {/* <Button id="add-button" onClick={openModal}>+</Button> */}
                 </div>
                 <div className="keyword-parent">
                     {collectiveKeywordList!==undefined && collectiveKeywordList.length > 0 && collectiveKeywordList[0] !== ""
@@ -103,10 +109,12 @@ function KeywordSidebar(props) {
                         <div
                         key={index}
                         className="keyword"
-                        onClick={() => handleKeywordClick(index)}
+                        // UNCOMMENT IN VERSION 1.1
+                        // onClick={() => handleKeywordClick(index)}
                     >
                         <p className="keyword-inner-text">{item}</p>
-                        <i className="ico-times" role="img" aria-label="Cancel"></i>
+                        {/* UNCOMMENT keyword-sidebar-hide in version 1.1 */}
+                        <i className="ico-times keyword-sidebar-hide" role="img" aria-label="Cancel"></i>
                     </div>
                     ))
                     : <p>No keywords available. Add keywords or enhance the query for better results!</p>
