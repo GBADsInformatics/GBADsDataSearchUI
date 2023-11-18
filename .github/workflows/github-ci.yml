@@ -16,4 +16,4 @@ jobs:
     uses: GBADsInformatics/DevopsWorkflows/.github/workflows/aws.yml@main
     secrets: inherit
     with:
-      SERVICE_NAME: search-ui-service
+      SERVICE_NAME: tail-ui-service
