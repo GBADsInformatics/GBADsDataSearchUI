@@ -74,22 +74,7 @@ function MainGrid(props) {
     // TO BE USED ONCE THE API IS COMPLETE
     useEffect(() => {
         const apiUrl = 'https://gbadske.org/meta-api/datasets';
-        try {
-            const params = {
-                countries: keywords.countries.join(' '),
-                species:  keywords.species.join(' '),
-              };
-
-            axios.get(apiUrl, { params })
-              .then(response => {
-                const originalData = response.data;
-                // Set the merged data in the state
-                setRequestedData(originalData);
-                setLoading(false);
-              });
-          } catch (exception) {
-            console.error(exception);
-          }
+        optionChangeApiCall();
   }, []);
 
   useEffect(() => {
@@ -163,7 +148,7 @@ useEffect(() =>{
                     </tr>
                 </thead>
                 <tbody>
-                    {reqData.map((item, index) => (
+                    {Array.isArray(reqData) && reqData.map((item, index) => (
                         <tr className='data-row' key={index} onClick={() => handleRowClick(index)}>
                             <td className='parent-cell'>
                                 <DatasetCell
@@ -199,7 +184,12 @@ useEffect(() =>{
                                 />
                             </td>
                         </tr>
-                    ))}
+                    ))
+                    || 
+                    <div>
+                        <p>No data could be loaded...</p>
+                    </div>
+                    }
                 </tbody>
             </Table>
         </Container>
