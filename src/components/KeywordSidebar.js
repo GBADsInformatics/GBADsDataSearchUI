@@ -11,6 +11,7 @@ function KeywordSidebar(props) {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [selectedOption, setSelectedOption] = useState("NA");
     const [collectiveKeywordList, setCollectiveKeywordList] = useState([]);
+    const [collectiveToArray, setCollectiveArray] = useState([]);
 
     const openModal = () => {
         setNewKeyword(""); // Clear the input field when opening the modal
@@ -60,6 +61,27 @@ function KeywordSidebar(props) {
         }
     };
 
+    // const removeWordFromCollective = (toRemove) => {
+
+    // }
+
+    const convertCollectiveToArray = () => {
+        const collectiveArray = [];
+      
+        if (collectiveKeywordList && collectiveKeywordList.species) {
+          collectiveArray.push(...(collectiveKeywordList.species));
+        }
+      
+        if (collectiveKeywordList && collectiveKeywordList.countries) {
+          collectiveArray.push(...(collectiveKeywordList.countries));
+        }
+      
+        if (collectiveKeywordList && collectiveKeywordList.years) {
+          collectiveArray.push(...(collectiveKeywordList.years));
+        }
+        return collectiveArray;
+      };      
+
     const handleKeywordClick = (index) => {
         // Remove the clicked keyword from the list
         const removedValue = collectiveKeywordList.splice(index, 1)[0];
@@ -80,10 +102,10 @@ function KeywordSidebar(props) {
 
     useEffect(() => {
         props.setNewKeywords(keywords);
-        if (keywords.countries !== undefined){
-            const updatedCollectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
-            setCollectiveKeywordList(updatedCollectiveKeywordList);
-        }
+        // if (keywords.countries !== undefined){
+        //     const updatedCollectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
+        //     setCollectiveKeywordList(updatedCollectiveKeywordList);
+        // }
   }, [keywords]);
 
   useEffect(() => {
@@ -92,6 +114,20 @@ function KeywordSidebar(props) {
     setCollectiveKeywordList(props.keywords);
   }, [props.keywords])
 
+
+  useEffect(() => {
+    setCollectiveArray(convertCollectiveToArray());
+    console.log("USEEFFECT");
+    console.log(convertCollectiveToArray());
+  }, [collectiveKeywordList])
+
+  console.log("Collectivelist:")
+  console.log(collectiveKeywordList);
+
+  console.log("GEN REPORT");
+  console.log(collectiveKeywordList!==undefined);
+  console.log(collectiveKeywordList.length);
+  console.log(collectiveKeywordList[0]);
 
 
 
@@ -104,8 +140,8 @@ function KeywordSidebar(props) {
                     {/* <Button id="add-button" onClick={openModal}>+</Button> */}
                 </div>
                 <div className="keyword-parent">
-                    {collectiveKeywordList!==undefined && collectiveKeywordList.length > 0 && collectiveKeywordList[0] !== ""
-                        ? collectiveKeywordList.map((item, index) => (
+                    {collectiveKeywordList!==undefined
+                        ? collectiveToArray.map((item, index) => (
                         <div
                         key={index}
                         className="keyword"

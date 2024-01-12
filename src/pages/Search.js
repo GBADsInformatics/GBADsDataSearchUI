@@ -75,13 +75,7 @@ function Search() {
     // Update the keywords in the parent component's state
     setSearchWas(theSearchQuery);
     fetchKeywordsFromApi(theSearchQuery);
-    
-    const queryParams = createParams(theSearchQuery);
-
-    navigate({
-      pathname: path,
-      search: createSearchParams(queryParams).toString()
-    });
+    resetKeywords(keywords);
     
   };
 
