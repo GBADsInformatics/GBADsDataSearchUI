@@ -1,4 +1,4 @@
-## Running the Projectt :running_woman:
+## Running the Project :running_woman:
 
 In the `src` directory, you can run:
 
