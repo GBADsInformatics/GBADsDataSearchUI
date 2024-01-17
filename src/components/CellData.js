@@ -48,7 +48,7 @@ function CellData(props){
     const copyText = () => {
         setCopy(true);
 
-        navigator.clipboard.writeText("GBADs Beta version, copying to clipboard coming soon!")
+        navigator.clipboard.writeText(props.apiCall)
     
         setTimeout(() => {
             setCopy(false);

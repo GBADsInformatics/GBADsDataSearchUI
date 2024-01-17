@@ -190,14 +190,14 @@ useEffect(() =>{
                                 title={item.name}
                                 desc={item.description}
                                 startYear= "2018" 
-                                csvDownloadlink={item.contentUrl ? item.contentUrl[1] : undefined}
-                                nameOfDataSet={item.sourceTable} // Fix for future
-                                authors="Example authors" // Fix for future
+                                csvDownloadlink={item.contentUrl ? item.contentUrl.find(url => url.endsWith(".csv")) : undefined}
+                                nameOfDataSet={item.sourceTable}
+                                authors="Example authors" // Fix for futures
                                 nameOfDataSource="Example name of data source" // Fix this for future
                                 endYear="2021" // Fix this for future
                                 tableName={item.sourceTable} 
                                 apiCall="Example API Call script" // Fix for future
-                                metadataDownloadLink={item.contentUrl ? item.contentUrl[0] : undefined} // Not sure this is right
+                                metadataDownloadLink={item.contentUrl ? item.contentUrl.find(url => url.includes("https://gbadske.org/api/GBADsPublicQuery/")) : undefined} // Not sure this is right
                                 columnsIncluded="Example columns included" // Fix for future
                                 measured="Example species 1, species 2, etc"
                                 spatialRange={item.spatialCoverage}

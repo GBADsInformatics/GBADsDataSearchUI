@@ -205,9 +205,9 @@ function HomeKeywordOptions(props){
                                     <ToggleButton onClick={() => handleOptionClick(item)} className={`btn ${buttonStates[item] ? 'keyword-homepage-selected' : 'keyword-homepage-disabled'}`}>
                                         {item}
                                         {(buttonStates[item]) ? (
-                                        <i class="ico-times home-icon" role="img" aria-label="Cancel"></i>
+                                        <i className="ico-times home-icon" role="img" aria-label="Cancel"></i>
                                     ) : (
-                                        <i class="ico-check home-icon" role="img" aria-label="Accept"></i>
+                                        <i className="ico-check home-icon" role="img" aria-label="Accept"></i>
                                     )}
                                     </ToggleButton>
                                 </div>
