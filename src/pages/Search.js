@@ -122,11 +122,11 @@ function Search() {
     }
   };
 
-  useEffect(() => {
-    // Trigger the animation when searchText and keywords are not empty
-    console.log("HERE THEY ARE");
-    console.log(keywords)
-  }, [keywords]);
+  // useEffect(() => {
+  //   // Trigger the animation when searchText and keywords are not empty
+  //   console.log("HERE THEY ARE");
+  //   console.log(keywords)
+  // }, [keywords]);
 
   return (
     <div>

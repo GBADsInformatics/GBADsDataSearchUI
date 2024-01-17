@@ -45,17 +45,12 @@ function MainGrid(props) {
                 species:  keywords.species.join(' '),
               };
 
-            console.log("INFO:");
-
-            console.log(params);
-
             axios.get(apiUrl, { params })
               .then(response => {
                 const originalData = response.data;
                 // Set the merged data in the state
                 setRequestedData(originalData);
                 setLoading(false);
-                console.log(originalData);
               });
             
           } catch (exception) {
@@ -112,11 +107,42 @@ useEffect(() =>{
         );
     }
 
-    if (reqData == null){
+    if (reqData === null || reqData === undefined || reqData.length === 0){
         return(
-            <div>
-                <p>No data</p>
+            <Container className='main-table'>
+            <div className="d-flex justify-content-end inner-table">
+                <ButtonGroup>
+                    <Button
+                    className={selectedOption === 'data' ? 'main-option-button-selected' : 'main-option-button '}
+                    onClick={() => handleOptionClick('data')}>Data</Button>{' '}
+
+                    <Button
+                    className={selectedOption === 'literature' ? 'main-option-button-selected' : 'main-option-button '}
+                    onClick={() => handleOptionClick('literature')}>Literature</Button>{' '}
+                     <Button
+                    className={selectedOption === 'query' ? 'main-option-button-selected' : 'main-option-button '}
+                    onClick={() => handleOptionClick('query')}>Query</Button>{' '}
+                    {/* <Button className="main-option-button btn-outline">Query</Button>{' '} */}
+                    {/* <Button variant="outline-secondary">Export As</Button>{' '} */}
+                </ButtonGroup>
             </div>
+            <Table responsive>
+                <thead>
+                    <tr>
+                        <th style={{color: "grey"}}>Dataset</th>
+                        <th style={{color: "grey"}}>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr className='data-row'>
+                        <td className='parent-cell'>
+                            No results. Please search again.
+                        </td>
+                        <td className='parent-cell'> </td>
+                    </tr>
+                </tbody>
+            </Table>
+        </Container>
         );
     }
 
@@ -186,9 +212,40 @@ useEffect(() =>{
                         </tr>
                     ))
                     || 
-                    <div>
-                        <p>No data could be loaded...</p>
-                    </div>
+                    <Container className='main-table'>
+                        <div className="d-flex justify-content-end inner-table">
+                            <ButtonGroup>
+                                <Button
+                                className={selectedOption === 'data' ? 'main-option-button-selected' : 'main-option-button '}
+                                onClick={() => handleOptionClick('data')}>Data</Button>{' '}
+
+                                <Button
+                                className={selectedOption === 'literature' ? 'main-option-button-selected' : 'main-option-button '}
+                                onClick={() => handleOptionClick('literature')}>Literature</Button>{' '}
+                                <Button
+                                className={selectedOption === 'query' ? 'main-option-button-selected' : 'main-option-button '}
+                                onClick={() => handleOptionClick('query')}>Query</Button>{' '}
+                                {/* <Button className="main-option-button btn-outline">Query</Button>{' '} */}
+                                {/* <Button variant="outline-secondary">Export As</Button>{' '} */}
+                            </ButtonGroup>
+                        </div>
+                        <Table responsive>
+                            <thead>
+                                <tr>
+                                    <th style={{color: "grey"}}>Dataset</th>
+                                    <th style={{color: "grey"}}>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr className='data-row'>
+                                    <td className='parent-cell'>
+                                        No results. Please search again.
+                                    </td>
+                                    <td className='parent-cell'> </td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </Container>
                     }
                 </tbody>
             </Table>

@@ -117,17 +117,8 @@ function KeywordSidebar(props) {
 
   useEffect(() => {
     setCollectiveArray(convertCollectiveToArray());
-    console.log("USEEFFECT");
-    console.log(convertCollectiveToArray());
   }, [collectiveKeywordList])
 
-  console.log("Collectivelist:")
-  console.log(collectiveKeywordList);
-
-  console.log("GEN REPORT");
-  console.log(collectiveKeywordList!==undefined);
-  console.log(collectiveKeywordList.length);
-  console.log(collectiveKeywordList[0]);
 
 
 
