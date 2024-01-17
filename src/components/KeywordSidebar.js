@@ -89,7 +89,7 @@ function KeywordSidebar(props) {
         for (const key in copyKeywords) {
             if (copyKeywords.hasOwnProperty(key) && Array.isArray(copyKeywords[key])) {
               const list = copyKeywords[key];
-              console.log(`List for ${key}:`);
+            //   console.log(`List for ${key}:`);
               const updatedList = list.filter(item => item !== removedValue);
               copyKeywords[key] = updatedList;
             }

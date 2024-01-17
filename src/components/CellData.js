@@ -61,7 +61,6 @@ function CellData(props){
 
     
       const handleCloseModal = () => {
-        console.log('Close Button Clicked (CELLDATA)'); // Add this line for debugging
         setShowModal(false);
         props.onCloseModal();
     };
