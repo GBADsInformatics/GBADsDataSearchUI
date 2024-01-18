@@ -18,6 +18,52 @@ function HomeKeywordOptions(props){
     const [selectedOption, setSelectedOption] = useState("NA");
     const [collectiveKeywordList, setCollectiveKeywordList] = useState([]);
 
+    const [enrichedKeywords, setEnriched] = useState([]);
+
+    const animalData = {
+        "Cattle": ["Bovine", "Cows", "Steers", "Heifers"],
+        "Chicken": ["Poultry", "Hens", "Roosters", "Broilers"],
+        "Dog": ["Canines", "Puppies", "Breeds", "Domestic Dogs"],
+        "Cat": ["Felines", "Kittens", "Breeds", "Domestic Cats"],
+        "Camel": ["Dromedaries", "Bactrian Camels", "Camelids", "Desert Animals"],
+        "Sheep": ["Ovine", "Ewes", "Rams", "Lambs"],
+        "Pig": ["Swine", "Sows", "Boars", "Piglets"],
+        "Horse": ["Equine", "Mares", "Stallions", "Foals"],
+        "Donkey": ["Equids", "Jennies", "Jacks", "Mules"],
+    }
+
+    function findMatchingTerms(userInput) {
+        userInput = userInput.toLowerCase(); // Convert to lowercase for case-insensitive matching
+      
+        const results = [];
+      
+        // Check if the userInput matches the key exactly
+        if (animalData.hasOwnProperty(userInput)) {
+          results.push(animalData[userInput]);
+        }
+      
+        // Check if the userInput is a substring of the key
+        for (const key in animalData) {
+          if (key.toLowerCase().includes(userInput)) {
+            results.push(animalData[key]);
+          }
+        }
+      
+        // Check if the userInput is one of the values in the arrays
+        for (const key in animalData) {
+          const values = animalData[key];
+          for (const value of values) {
+            if (value.toLowerCase() === userInput) {
+              results.push(values.filter((v) => v !== value));
+            } else if (value.toLowerCase().includes(userInput)) {
+              results.push(values.filter((v) => v !== value));
+            }
+          }
+        }
+      
+        return results.flat();
+      }
+
 
     // const collectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
 
@@ -141,6 +187,8 @@ function HomeKeywordOptions(props){
               categorizedKeywords.countries.push(key);
             } else if (keywords.years.includes(key)) {
               categorizedKeywords.years.push(key);
+            } else if (enrichedKeywords.includes(key)){
+                categorizedKeywords.species.push(key);
             }
           }
         }
@@ -162,6 +210,16 @@ function HomeKeywordOptions(props){
     useEffect(() => {
         if (keywords.countries !== undefined){
             const updatedCollectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
+            if (keywords.species !== undefined){
+                var arrayOfEnriched = [];
+                console.log("B4");
+                console.log(keywords.species);
+                for (var item of keywords.species) {
+                    var matchedEnriched = findMatchingTerms(item);
+                    arrayOfEnriched.push(...matchedEnriched);
+                }
+                setEnriched(arrayOfEnriched);
+            }
             setCollectiveKeywordList(updatedCollectiveKeywordList);
         }
       }, [keywords]);
@@ -223,6 +281,24 @@ function HomeKeywordOptions(props){
                     <h3 style={{fontWeight: "normal",animationDelay: "1s"}} className='animate__animated animate__fadeIn'>We enriched your query with our semantic layer</h3>
                     <h4 style={{fontWeight: "lighter", animationDelay: "1.5s"}} className='animate__animated animate__fadeInUp'>You can select more terms to help expand your search</h4>
                 </Container>
+                {(enrichedKeywords !== undefined && enrichedKeywords.length !== 0) ? (
+                        <ToggleButtonGroup name="ml-api" className="keyword-parent-homepage">
+                            {enrichedKeywords.map((item, index) => (
+                                <div key={index} className="keyword-wrapper">
+                                    <ToggleButton onClick={() => handleOptionClick(item)} className={`btn ${buttonStates[item] ? 'keyword-homepage-selected' : 'keyword-homepage-disabled'}`}>
+                                        {item}
+                                        {(buttonStates[item]) ? (
+                                        <i className="ico-times home-icon" role="img" aria-label="Cancel"></i>
+                                    ) : (
+                                        <i className="ico-check home-icon" role="img" aria-label="Accept"></i>
+                                    )}
+                                    </ToggleButton>
+                                </div>
+                            ))}
+                        </ToggleButtonGroup>
+                    ) : (
+                        <div>No enriched keywords detected. Please enhance your query and try again.</div>
+                    )}
                 <Button style={{marginTop: '2%', animationDelay: "2s"}} className="animate__animated animate__fadeIn" onClick={performLegitSearch}>Search</Button>
                 </Form.Group>
             </Form>
