@@ -1,5 +1,5 @@
 // Search.js (Parent Component)
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchNav from '../components/SearchNav';
 import MainGrid from '../components/MainGrid';

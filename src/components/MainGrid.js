@@ -1,5 +1,5 @@
 // import { useState } from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import { ButtonGroup, Container } from 'react-bootstrap';
@@ -36,7 +36,7 @@ function MainGrid(props) {
         setModalOpen(false);
     };
 
-    const optionChangeApiCall = () => {
+    const optionChangeApiCall = useCallback(() => {
         // ONCE WE HAVE A WAY TO CHECK WHERE TO SEARCH FOR LITERATURE, QUERY, AND DATA WE CAN MODIFY THE CALL
         const apiUrl = 'https://gbadske.org/meta-api/datasets';
         try {
@@ -56,7 +56,7 @@ function MainGrid(props) {
           } catch (exception) {
             console.error(exception);
           }
-    }
+    }, [keywords]);
 
     
     const handleOptionClick = (option) => {
@@ -67,10 +67,9 @@ function MainGrid(props) {
       };
     
     // TO BE USED ONCE THE API IS COMPLETE
-    useEffect(() => {
-        const apiUrl = 'https://gbadske.org/meta-api/datasets';
-        optionChangeApiCall();
-  }, []);
+//     useEffect(() => {
+//         optionChangeApiCall();
+//   }, [optionChangeApiCall]);
 
   useEffect(() => {
     setKeywords(props.keywords);
@@ -78,7 +77,7 @@ function MainGrid(props) {
 
 useEffect(() =>{
     optionChangeApiCall();
-}, [keywords])
+}, [keywords, optionChangeApiCall])
 
     if (isLoading) {
         
@@ -174,7 +173,7 @@ useEffect(() =>{
                     </tr>
                 </thead>
                 <tbody>
-                    {Array.isArray(reqData) && reqData.map((item, index) => (
+                    {Array.isArray(reqData) ? reqData.map((item, index) => (
                         <tr className='data-row' key={index} onClick={() => handleRowClick(index)}>
                             <td className='parent-cell'>
                                 <DatasetCell
@@ -211,7 +210,7 @@ useEffect(() =>{
                             </td>
                         </tr>
                     ))
-                    || 
+                    : 
                     <Container className='main-table'>
                         <div className="d-flex justify-content-end inner-table">
                             <ButtonGroup>

@@ -9,16 +9,18 @@ function DatasetCell(props){
                 <p><b>{props.title}</b></p>
             </div>
 
-            <div className="organize-year-author">
+            <div className="organize-year-author-source">
                 <div>
-                    {props.startYear}-{props.endYear}
+                    {props.startYear}-{props.endYear} <span className="separator"> | </span> {props.authors}
                 </div>
-                <span style={{marginRight: '5px', marginLeft: '5px'}}> | </span>
+                {/* <span style={{marginRight: '5px', marginLeft: '5px'}}> | </span>
                 <div>
                     {props.authors}
+                </div> */}
+                <div>
+                    {props.source}
                 </div>
             </div>
-            {props.source}
         </div>
     );
 }

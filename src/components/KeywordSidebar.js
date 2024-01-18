@@ -8,15 +8,15 @@ function KeywordSidebar(props) {
     const [showModal, setShowModal] = useState(false);
     const [newKeyword, setNewKeyword] = useState("");
     const [keywords, setKeywords] = useState(props.keywords);
-    const [hoveredIndex, setHoveredIndex] = useState(null);
+    // const [hoveredIndex, setHoveredIndex] = useState(null);
     const [selectedOption, setSelectedOption] = useState("NA");
     const [collectiveKeywordList, setCollectiveKeywordList] = useState([]);
     const [collectiveToArray, setCollectiveArray] = useState([]);
 
-    const openModal = () => {
-        setNewKeyword(""); // Clear the input field when opening the modal
-        setShowModal(true);
-    };
+    // const openModal = () => {
+    //     setNewKeyword(""); // Clear the input field when opening the modal
+    //     setShowModal(true);
+    // };
 
     const addToJsonKeywords = () =>{
         if (selectedOption==="species"){
@@ -82,23 +82,23 @@ function KeywordSidebar(props) {
         return collectiveArray;
       };      
 
-    const handleKeywordClick = (index) => {
-        // Remove the clicked keyword from the list
-        const removedValue = collectiveKeywordList.splice(index, 1)[0];
-        const copyKeywords = keywords;
-        for (const key in copyKeywords) {
-            if (copyKeywords.hasOwnProperty(key) && Array.isArray(copyKeywords[key])) {
-              const list = copyKeywords[key];
-            //   console.log(`List for ${key}:`);
-              const updatedList = list.filter(item => item !== removedValue);
-              copyKeywords[key] = updatedList;
-            }
-          }
-        setKeywords(copyKeywords);
-        const updatedCollectiveKeywordList = [...copyKeywords.countries, ...copyKeywords.species, ...copyKeywords.years];
-        setCollectiveKeywordList(updatedCollectiveKeywordList);
-        props.setNewKeywords(copyKeywords);
-    };
+    // const handleKeywordClick = (index) => {
+    //     // Remove the clicked keyword from the list
+    //     const removedValue = collectiveKeywordList.splice(index, 1)[0];
+    //     const copyKeywords = keywords;
+    //     for (const key in copyKeywords) {
+    //         if (copyKeywords.hasOwnProperty(key) && Array.isArray(copyKeywords[key])) {
+    //           const list = copyKeywords[key];
+    //         //   console.log(`List for ${key}:`);
+    //           const updatedList = list.filter(item => item !== removedValue);
+    //           copyKeywords[key] = updatedList;
+    //         }
+    //       }
+    //     setKeywords(copyKeywords);
+    //     const updatedCollectiveKeywordList = [...copyKeywords.countries, ...copyKeywords.species, ...copyKeywords.years];
+    //     setCollectiveKeywordList(updatedCollectiveKeywordList);
+    //     props.setNewKeywords(copyKeywords);
+    // };
 
     useEffect(() => {
         props.setNewKeywords(keywords);
@@ -117,7 +117,7 @@ function KeywordSidebar(props) {
 
   useEffect(() => {
     setCollectiveArray(convertCollectiveToArray());
-  }, [collectiveKeywordList])
+  }, [convertCollectiveToArray, collectiveKeywordList])
 
 
 

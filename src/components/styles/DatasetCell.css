@@ -28,9 +28,20 @@
     }
 }
 
-.organize-year-author{
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
+@media (max-width: 1000px) {
+    .organize-year-author-source{
+        text-align: center;
+    }
+    .separator {
+        display: none !important;
+    }
+}
+
+.separator {
+    display: inline; /* Show the separator on larger screens */
+    margin: 0 5px; /* Add margin for spacing */
+  }
+
+.organize-year-author-source{
     margin-top: -3%;
 }
