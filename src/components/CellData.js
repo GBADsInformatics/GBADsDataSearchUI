@@ -115,15 +115,15 @@ function CellData(props){
                     <Container style={{textAlign: "center"}}>
                         <ButtonGroup className="mb-2">
                             {props.csvDownloadlink !== undefined ? (
-                                <Button variant="outline-primary" onClick={() => window.open(props.csvDownloadlink, '_blank')}>
+                                <Button variant="outline-primary" data-bs-toggle="tooltip" title="Download the CSV data" onClick={() => window.open(props.csvDownloadlink, '_blank')}>
                                 CSV
                                 </Button>
                             ) : null}
-                            <Button variant={copied ? 'success' : 'outline-secondary'} onClick={copyText}>
+                            <Button variant={copied ? 'success' : 'outline-secondary'} data-bs-toggle="tooltip" title="Copy code for API request" onClick={copyText}>
                                 {copied ? 'Copied to clipboard!' : 'API CALL'}
                             </Button>
                             {props.metadataDownloadLink !== undefined ? (
-                                <Button variant="outline-secondary" onClick={() => window.open(props.metadataDownloadLink, '_blank')}>
+                                <Button variant="outline-secondary" data-bs-toggle="tooltip" title="Download the metadata" onClick={() => window.open(props.metadataDownloadLink, '_blank')}>
                                 Download metadata
                                 </Button>
                             ) : null}
