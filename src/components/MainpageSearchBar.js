@@ -14,6 +14,7 @@ const SearchBar = (props) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    document.body.style.overflow = 'hidden';
     // Implement your search functionality here
     // You can access the search query using e.target.elements.search.value
     props.recSearch(searchText);
