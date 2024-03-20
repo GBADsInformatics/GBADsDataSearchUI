@@ -188,21 +188,21 @@ useEffect(() =>{
                                 <CellData 
                                 title={item.name}
                                 desc={item.description}
-                                startYear= "2018" 
+                                startYear={item.startYear}
                                 csvDownloadlink={item.contentUrl ? item.contentUrl.find(url => url.endsWith(".csv")) : undefined}
                                 nameOfDataSet={item.sourceTable}
-                                authors="Example authors" // Fix for futures
-                                nameOfDataSource="Example name of data source" // Fix this for future
-                                endYear="2021" // Fix this for future
+                                authors={item.authors} // Fix for futures
+                                nameOfDataSource={item.nameOfDataSource} // Fix this for future
+                                endYear={item.endYear} // Fix this for future
                                 tableName={item.sourceTable} 
-                                apiCall="Example API Call script" // Fix for future
+                                apiCall={item.apiCall} // Fix for future
                                 metadataDownloadLink={item.contentUrl ? item.contentUrl.find(url => url.includes("https://gbadske.org/api/GBADsPublicQuery/")) : undefined} // Not sure this is right
-                                columnsIncluded="Example columns included" // Fix for future
-                                measured="Example species 1, species 2, etc"
+                                columnsIncluded={item.columnsIncluded} // Fix for future
+                                measured={item.measured}
                                 spatialRange={item.spatialCoverage}
                                 temporalRange={item.temporalCoverage}
-                                source="Example source"
-                                contactPoint="Example contact point"
+                                source={item.source}
+                                contactPoint={item.contactPoint}
                                 licence={item.license}
                                 isOpen={selectedRowIndex === index}
                                 onCloseModal={handleCloseModal}
