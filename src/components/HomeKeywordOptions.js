@@ -300,7 +300,7 @@ function HomeKeywordOptions(props){
                     ) : (
                         <div>No enriched keywords detected. Please enhance your query and try again.</div>
                     )}
-                <Button style={{marginTop: '2%', animationDelay: "2s"}} className="animate__animated animate__fadeIn" onClick={performLegitSearch}>Search</Button>
+                <Button style={{marginTop: '2%', animationDelay: "2s"}} id="search-TAIL" className="animate__animated animate__fadeIn" onClick={performLegitSearch}>Search</Button>
                 </Form.Group>
             </Form>
         </Container>
@@ -340,7 +340,7 @@ function HomeKeywordOptions(props){
                     <Button variant="secondary" onClick={closeModal}>
                         Close
                     </Button>
-                    <Button id="search-TAIL" className="branded-orange" onClick={saveChanges}>
+                    <Button className="branded-orange" onClick={saveChanges}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
