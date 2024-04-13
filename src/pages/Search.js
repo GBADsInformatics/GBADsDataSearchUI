@@ -112,6 +112,7 @@ function Search() {
       const urlWithQuery = `${baseUrl}?query=${encodedSentence}`;
 
       const response = await axios.get(urlWithQuery);
+      console.log(response);
 
       const data = response.data;
       // const refinedResults = refineApiResults(data);

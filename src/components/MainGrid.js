@@ -10,7 +10,6 @@ import DatasetCell from './DatasetCell';
 
 import LoadingTable from './LoadingTable';
 
-
 function MainGrid(props) {
     const [selectedOption, setSelectedOption] = useState('data');
     // Used to choose which option to see (Data, Literature, Query)
@@ -38,17 +37,19 @@ function MainGrid(props) {
 
     const optionChangeApiCall = useCallback(() => {
         // ONCE WE HAVE A WAY TO CHECK WHERE TO SEARCH FOR LITERATURE, QUERY, AND DATA WE CAN MODIFY THE CALL
-        const apiUrl = 'https://gbadske.org/meta-api/datasets';
         try {
+            const apiUrl = 'https://gbadske.org/meta-api/datasets';
             const params = {
-                countries: keywords.countries.join(' '),
-                species:  keywords.species.join(' '),
+                countries: keywords.countries.join(','),
+                species:  keywords.species.join(','),
               };
-
+            
             axios.get(apiUrl, { params })
               .then(response => {
+                console.log(apiUrl, {params});
                 const originalData = response.data;
                 // Set the merged data in the state
+                console.log(originalData);
                 setRequestedData(originalData);
                 setLoading(false);
               });

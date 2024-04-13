@@ -10,8 +10,8 @@ function KeywordSidebar(props) {
     const [keywords, setKeywords] = useState(props.keywords);
     // const [hoveredIndex, setHoveredIndex] = useState(null);
     const [selectedOption, setSelectedOption] = useState("NA");
-    const [collectiveKeywordList, setCollectiveKeywordList] = useState([]);
-    const [collectiveToArray, setCollectiveArray] = useState([]);
+    const [collectiveKeywordList, setCollectiveKeywordList] = useState(props.keywords);
+    const [collectiveToArray, setCollectiveArray] = useState([...props.keywords.countries, ...props.keywords.species, ...props.keywords.years]);
 
     // const openModal = () => {
     //     setNewKeyword(""); // Clear the input field when opening the modal
@@ -106,18 +106,21 @@ function KeywordSidebar(props) {
         //     const updatedCollectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
         //     setCollectiveKeywordList(updatedCollectiveKeywordList);
         // }
+        setCollectiveKeywordList(props.keywords);
+        setCollectiveArray([...keywords.countries, ...keywords.species, ...keywords.years]);
   }, [keywords]);
 
   useEffect(() => {
     setKeywords(props.keywords);
     // const updatedCollectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
     setCollectiveKeywordList(props.keywords);
+    setCollectiveArray([...keywords.countries, ...keywords.species, ...keywords.years]);
   }, [props.keywords])
 
 
-  useEffect(() => {
-    setCollectiveArray(convertCollectiveToArray());
-  }, [convertCollectiveToArray, collectiveKeywordList])
+//   useEffect(() => {
+//     setCollectiveArray(convertCollectiveToArray());
+//   }, [convertCollectiveToArray, collectiveKeywordList])
 
 
 
