@@ -14,7 +14,7 @@ function Logs(){
           const data = response.data;
           // const refinedResults = refineApiResults(data);
           setLogs(data);
-          console.log(data);
+        //   console.log(data);
           // Call sendDataToParent to send keywords back to the parent
         } catch (error) {
           console.error('Error fetching logs:', error);

@@ -46,10 +46,10 @@ function MainGrid(props) {
             
             axios.get(apiUrl, { params })
               .then(response => {
-                console.log(apiUrl, {params});
+                // console.log(apiUrl, {params});
                 const originalData = response.data;
                 // Set the merged data in the state
-                console.log(originalData);
+                // console.log(originalData);
                 setRequestedData(originalData);
                 setLoading(false);
               });
@@ -189,15 +189,22 @@ useEffect(() =>{
                                 <CellData 
                                 title={item.name}
                                 desc={item.description}
+                                species={item.species}
                                 startYear={item.startYear}
-                                csvDownloadlink={item.contentUrl ? item.contentUrl.find(url => url.endsWith(".csv")) : undefined}
+                                csvDownloadlink={
+                                    item.DataDownload.find(download => download.encodingFormat === "csv") 
+                                        ? item.DataDownload.find(download => download.encodingFormat === "csv").contentUrl 
+                                        : undefined
+                                }
                                 nameOfDataSet={item.sourceTable}
-                                authors={item.authors} // Fix for futures
+                                provider={item.provider}
                                 nameOfDataSource={item.nameOfDataSource} // Fix this for future
                                 endYear={item.endYear} // Fix this for future
                                 tableName={item.sourceTable} 
-                                apiCall={item.apiCall} // Fix for future
-                                metadataDownloadLink={item.contentUrl ? item.contentUrl.find(url => url.includes("https://gbadske.org/api/GBADsPublicQuery/")) : undefined} // Not sure this is right
+                                apiCall={item.DataDownload.find(download => download.encodingFormat === "API") 
+                                ? item.DataDownload.find(download => download.encodingFormat === "API").contentUrl 
+                                : undefined} // Fix for future
+                                metadataDownloadLink={item.DataDownload.encodingFormat === "API" ? item.DataDownload.contentUrl : undefined} // Not sure this is right
                                 columnsIncluded={item.columnsIncluded} // Fix for future
                                 measured={item.measured}
                                 spatialRange={item.spatialCoverage}

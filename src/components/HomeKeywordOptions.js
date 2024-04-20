@@ -213,8 +213,6 @@ function HomeKeywordOptions(props){
             const updatedCollectiveKeywordList = [...keywords.countries, ...keywords.species, ...keywords.years];
             if (keywords.species !== undefined){
                 var arrayOfEnriched = [];
-                console.log("B4");
-                console.log(keywords.species);
                 for (var item of keywords.species) {
                     var matchedEnriched = findMatchingTerms(item);
                     arrayOfEnriched.push(...matchedEnriched);

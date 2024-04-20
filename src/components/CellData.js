@@ -102,10 +102,22 @@ function CellData(props){
                             <p><b>Table Name:</b> {props.tableName}</p>
                         </div>
                     )}
-                    {props.authors && (
+                    {props.provider && (
                         <div className='left-align-modal-icons'>
                             <FontAwesomeIcon icon={faUsers} style={{ color: 'black', marginTop: "1%", marginRight: "1%" }}/>
-                            <p><b>Authors:</b> {props.authors}</p>
+                            <p><b>Provider:</b></p>
+                            <Container style={{display: "flex", flexDirection: "column"}}>
+                                <p>{props.provider.name}</p>
+                                <p style={{marginTop: "-2%"}}>{props.provider.address}</p>
+                                <a href={`${props.provider.url}`}target="_blank" rel="noopener noreferrer" style={{marginTop: "-2.5%", marginBottom: "2%"}}>Website</a>
+                                <a href={`mailto:${props.provider.email}`}  target="_blank" rel="noopener noreferrer" style={{marginTop: "-2%", marginBottom: "2%"}}>Email: {props.provider.email}</a>
+                            </Container>
+                        </div>
+                    )}
+                    {props.species && (
+                        <div className='left-align-modal-icons'>
+                            <FontAwesomeIcon icon={faCow} style={{ color: 'black', marginTop: "1%", marginRight: "1%" }}/>
+                            <p><b>Species:</b> {props.species.join(', ')}</p>
                         </div>
                     )}
                     {props.nameOfDataSource && (
@@ -128,9 +140,11 @@ function CellData(props){
                             CSV
                             </Button>
                         )}
+                        {props.csvDownloadlink && (
                         <Button variant={copied ? 'success' : 'outline-secondary'} data-bs-toggle="tooltip" title="Copy code for API request" onClick={copyText}>
                             {copied ? 'Copied to clipboard!' : 'API CALL'}
                         </Button>
+                        )}
                         {props.metadataDownloadLink && (
                             <Button variant="outline-secondary" data-bs-toggle="tooltip" title="Download the metadata" onClick={() => window.open(props.metadataDownloadLink, '_blank')}>
                             Download metadata

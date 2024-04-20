@@ -27,8 +27,8 @@ function IdentifyURL(){
     }
   }
   catch (error){
-    console.log("ERROR:")
-    console.log(error)
+    // console.log("ERROR:")
+    // console.log(error)
     return "/data";
   }
 }

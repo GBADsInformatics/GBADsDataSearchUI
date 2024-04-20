@@ -33,8 +33,8 @@ function IdentifyURL(){
     }
   }
   catch (error){
-    console.log("ERROR:")
-    console.log(error)
+    // console.log("ERROR:")
+    // console.log(error)
     return "/data";
   }
 }
@@ -112,7 +112,7 @@ function Search() {
       const urlWithQuery = `${baseUrl}?query=${encodedSentence}`;
 
       const response = await axios.get(urlWithQuery);
-      console.log(response);
+      // console.log(response);
 
       const data = response.data;
       // const refinedResults = refineApiResults(data);
