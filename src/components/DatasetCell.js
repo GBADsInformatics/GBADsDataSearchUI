@@ -11,15 +11,15 @@ function DatasetCell(props){
 
             <div className="organize-year-author-source">
                 <div>
-                    {props.startYear}-{props.endYear} <span className="separator"> | </span> {props.authors}
+                    {props.temporalRange} <span className="separator"> | </span> {props.authors}
                 </div>
                 {/* <span style={{marginRight: '5px', marginLeft: '5px'}}> | </span>
                 <div>
                     {props.authors}
                 </div> */}
-                <div>
+                {/* <div>
                     {props.source}
-                </div>
+                </div> */}
             </div>
         </div>
     );
