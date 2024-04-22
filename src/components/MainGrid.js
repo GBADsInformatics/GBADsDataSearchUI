@@ -179,10 +179,9 @@ useEffect(() =>{
                             <td className='parent-cell'>
                                 <DatasetCell
                                 title={item.name}
-                                authors="Example authors"
-                                source="Example source"
-                                startYear= "2018"
-                                endYear= "2021"
+                                authors={item.provider.name}
+                                // source="Example source"
+                                temporalRange={item.temporalCoverage}
                                 />
                             </td>
                             <td className='parent-cell'>
