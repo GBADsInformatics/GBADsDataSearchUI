@@ -15,6 +15,8 @@ function Home() {
 
   const receiveSearchFromChild = (theSearchQuery) => {
     // Update the keywords in the parent component's state
+    var footer = document.getElementById("footer")
+    footer.style.backgroundColor = "white";
     setSearchWas(theSearchQuery);
     fetchKeywordsFromApi(theSearchQuery);
   };

@@ -171,6 +171,9 @@ function HomeKeywordOptions(props){
       
       const performLegitSearch = (e) => {
         e.preventDefault();
+        var footer = document.getElementById("footer")
+        footer.style.backgroundColor = "#333333";
+
         document.body.style.overflow = 'auto';
       
         const categorizedKeywords = {

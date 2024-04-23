@@ -4,7 +4,7 @@ import './styles/Footer.css';
 function Footer(){
     const currentYear = new Date().getFullYear();
     return(
-        <footer className="footer">
+        <footer id="footer" className="footer">
             <div className="container container-fluid">
                 <div className="row footer__links">
                     <div className="col footer__col">
