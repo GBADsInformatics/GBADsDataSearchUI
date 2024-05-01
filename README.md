@@ -48,3 +48,5 @@ A great example is found in KeywordSidebar.js:
 ## How can I start working on this?
 
 A good idea is to start by understanding the files within the pages folder, and see how the components are used in each file. Some of the routing to different routes is done in the within the `MainGrid.js` file, where depending on which option button is selected, the route will change.
+
+For more information on individual files, please refer to the docs folder in this repo.

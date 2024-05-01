@@ -179,12 +179,12 @@ class Automated_Test():
         self.validation_array.append(expected_result["countries"])
         self.validation_array.append(expected_result["years"])
 
-    def validate_ui(self, found_array):
+    def validate_ui(self, found_array, current_screen):
         temp_array = self.validation_array
         temp_array = temp_array.sort()
         found_array = found_array.sort()
         if temp_array == found_array:
-            print(Fore.GREEN + "Success! UI validated for this screen.")
+            print(Fore.GREEN + f'Success! UI validated for {current_screen} screen.')
             return True
         else:
             print(Fore.RED + "Error. UI could not be validated for this screen.")
@@ -217,7 +217,7 @@ class Automated_Test():
             all_options = self.driver.find_elements(By.CLASS_NAME, "keyword-wrapper")
             keywords = self.derive_keywords(all_options)
 
-            self.validate_ui(keywords)
+            self.validate_ui(keywords, "Homepage")
             
             search_button = self.driver.find_element(By.ID, "search-TAIL")
             search_button.click()
@@ -227,7 +227,7 @@ class Automated_Test():
             all_options = self.driver.find_elements(By.CLASS_NAME, "keyword")
             keywords = self.derive_keywords(all_options)
 
-            self.validate_ui(keywords)
+            self.validate_ui(keywords, "Search")
 
             Style.RESET_ALL
         except Exception as e:
