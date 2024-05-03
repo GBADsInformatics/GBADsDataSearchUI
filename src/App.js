@@ -5,6 +5,7 @@ import Search from './pages/Search';
 import FAQ from './pages/Faq';
 import Footer from './components/Footer';
 import Logs from './pages/Logs';
+import NotFound from './pages/NotFound';
 
 const App = () => {
  return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/search/query/query" element={<Search />} />
           <Route path="/search/faq" element={<FAQ />} />
           <Route path="/search/logs" element={<Logs />} />
+          <Route path="/search/*" element={<NotFound />} />
        </Routes>
        <Footer></Footer>
     </>

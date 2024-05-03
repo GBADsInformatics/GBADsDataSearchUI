@@ -108,9 +108,9 @@ function CellData(props){
                             <p><b>Provider:</b></p>
                             <Container style={{display: "flex", flexDirection: "column"}}>
                                 <p>{props.provider.name}</p>
-                                <p style={{marginTop: "-2%"}}>{props.provider.address}</p>
-                                <a href={`${props.provider.url}`}target="_blank" rel="noopener noreferrer" style={{marginTop: "-2.5%", marginBottom: "2%"}}>Website</a>
-                                <a href={`mailto:${props.provider.email}`}  target="_blank" rel="noopener noreferrer" style={{marginTop: "-2%", marginBottom: "2%"}}>Email: {props.provider.email}</a>
+                                {props.provider.address && <p style={{marginTop: "-2%"}}>{props.provider.address}</p>}
+                                {props.provider.url && <a href={`${props.provider.url}`} target="_blank" rel="noopener noreferrer" style={{marginTop: "-2.5%", marginBottom: "2%"}}>Website</a>}
+                                {props.provider.email && <a href={`mailto:${props.provider.email}`}  target="_blank" rel="noopener noreferrer" style={{marginTop: "-2%", marginBottom: "2%"}}>Email: {props.provider.email}</a>}
                             </Container>
                         </div>
                     )}
