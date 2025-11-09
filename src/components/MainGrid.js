@@ -38,7 +38,7 @@ function MainGrid(props) {
     const optionChangeApiCall = useCallback(() => {
         // ONCE WE HAVE A WAY TO CHECK WHERE TO SEARCH FOR LITERATURE, QUERY, AND DATA WE CAN MODIFY THE CALL
         try {
-            const apiUrl = 'https://gbadske.org/meta-api/datasets';
+            const apiUrl = 'https://gbadske.org/api/meta-api/datasets';
             const params = {
                 countries: keywords.countries.join(','),
                 species:  keywords.species.join(','),

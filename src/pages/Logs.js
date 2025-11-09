@@ -7,7 +7,7 @@ function Logs(){
 
     const fetchLogsFromAPI = async () => {
         try {
-          const baseUrl = "https://www.gbadske.org/search/api/logs";
+          const baseUrl = "https://www.gbadske.org/api/tail/logs";
     
           const response = await axios.get(baseUrl);
     

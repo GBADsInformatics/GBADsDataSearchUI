@@ -24,7 +24,7 @@ function Home() {
   const fetchKeywordsFromApi = async (theSearchQuery) => {
     try {
       // Replace this with your actual API call to fetch keywords
-      const baseUrl = "https://www.gbadske.org/search/api/search";
+      const baseUrl = "https://www.gbadske.org/api/tail/search";
       // Encode the sentence to ensure it's safe for use in a URL
       const encodedSentence = encodeURIComponent(theSearchQuery);
 
