@@ -27,7 +27,7 @@ jobs:
     secrets:
       template-input: >-
         ApplicationName=tail-ui,
-        DockerURI=gbadsinformatics/tail-ui:${{ needs.commit-hash.outputs.sha7 }},
+        DockerURI=gbadsinformatics/search-ui:${{ needs.commit-hash.outputs.sha7 }},
         BaseURL=/search,
         ListenerRulePriority=25
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
